@@ -9,22 +9,21 @@
         android:layout_height="fill_parent"
         android:layout_weight="0.69" >
 
-        <Button
+        <!--<Button
             android:id="@+id/buttonSetRTC"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="Set RTC" />
+            android:text="Set RTC" />-->
 
         <Button
             android:id="@+id/buttonConnect"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/buttonSetRTC"
             android:layout_alignParentLeft="true"
             android:text="Connect" />
 
-        <Button
+       <!-- <Button
             android:id="@+id/buttonDisconnect"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -39,9 +38,9 @@
             android:layout_alignBaseline="@+id/buttonDisconnect"
             android:layout_alignBottom="@+id/buttonDisconnect"
             android:layout_toRightOf="@+id/buttonDisconnect"
-            android:text="Get RTC" />
+            android:text="Get RTC" />-->
 
-        <TextView
+        <!--<TextView
             android:id="@+id/lblLog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,9 +56,18 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/lblLog"
-            android:text="- - -" />
+            android:text="- - -" />-->
 
         <TextView
+            android:id="@+id/lblStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+
+            android:text="- - -" />
+
+       <!-- <TextView
             android:id="@+id/lblPulse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,17 +84,17 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/lblPulse"
             android:text="PUSH-BUTTON: - - - " />
-
-        <Button
+-->
+       <!-- <Button
             android:id="@+id/buttonRequestData"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/buttonGetRTC"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@+id/buttonSetRTC"
-            android:text="Request Info" />
+            android:text="Request Info" />-->
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/lblData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,9 +129,9 @@
             android:layout_alignBottom="@+id/lblBAT"
             android:layout_alignLeft="@+id/buttonDisconnect"
             android:layout_alignParentRight="true"
-            android:text="SD CARD: - - " />
+            android:text="SD CARD: - - " />-->
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/lblACC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -148,9 +156,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/lblECG"
-            android:text="HR: - - " />
+            android:text="HR: - - " />-->
 
-        <Button
+       <!-- <Button
             android:id="@+id/buttonSearch"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -175,9 +183,9 @@
             android:layout_above="@+id/buttonGetRTC"
             android:layout_alignLeft="@+id/buttonGetRTC"
             android:layout_alignRight="@+id/buttonGetRTC"
-            android:text="Get DeviceId" />
+            android:text="Get DeviceId" />-->
 
-        <TextView
+      <!--  <TextView
             android:id="@+id/lblDeviceId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,25 +201,25 @@
             android:layout_above="@+id/lblDeviceId"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:text="." />
+            android:text="." />-->
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/lblTimeSpan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/buttonDisconnect"
             android:layout_below="@+id/lblHR"
-            android:text="SPAN: - - -" />
+            android:text="SPAN: - - -" />-->
 
-        <Button
+        <!--<Button
             android:id="@+id/buttonGetAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/buttonGetDeviceId"
             android:layout_alignLeft="@+id/buttonGetDeviceId"
             android:layout_alignRight="@+id/buttonGetDeviceId"
-            android:text="Get ACC" />
+            android:text="Get ACC" />-->
 
     </RelativeLayout>
 
