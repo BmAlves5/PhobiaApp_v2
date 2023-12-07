@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_spider_game.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- TextView para exibir o nível atual -->
+    <TextView
+        android:id="@+id/levelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Nível: 1"
+        android:layout_gravity="center"/>
+
+    <!-- Layout para as aranhas -->
+    <RelativeLayout
+        android:id="@+id/spidersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center"/>
+
+    <!-- Botões de nível -->
+    <Button
+        android:id="@+id/levelButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nível 1"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/levelButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nível 2"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/levelButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nível 3"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/levelButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nível 4"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/levelButton5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nível 5"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Voltar à Lista de Níveis"
+        android:visibility="invisible" />
+
+
+    <Button
+        android:id="@+id/accountButton"
+        android:layout_width="47dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/accountgrey"
+        android:elevation="10dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/account"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Account"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="44dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/homeblue"
+        android:backgroundTint="#11A4AC"
+        android:elevation="10dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/home"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Home"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="53dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/exit"
+        android:elevation="10dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/exit"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Exit"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+</LinearLayout>

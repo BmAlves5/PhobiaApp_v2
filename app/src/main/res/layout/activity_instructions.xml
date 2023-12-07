@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- res/layout/activity_instructions.xml -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <!-- Adicione as instruções do teste aqui -->
+
+        <!-- Botão para iniciar o teste -->
+        <Button
+            android:id="@+id/connectVitalJacket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connect Vital Jacket"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seu texto aqui" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context=".LoginActivity">
+
+
+
+
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imagem_background" />
+
+    <View
+        android:id="@+id/image_head"
+        android:layout_width="150dp"
+        android:layout_height="158dp"
+        android:layout_marginLeft="195dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/head" />
+
+    <TextView
+        android:id="@+id/phobia_app"
+        android:layout_width="108dp"
+        android:layout_height="98dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="73dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Phobia App"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/fullNameEditText"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="55dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="220dp"
+                android:hint="Full Name"
+                android:gravity="top"/>
+
+
+            <EditText
+                android:id="@+id/idCardEditText"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="55dp"
+                android:layout_alignParentTop="true"
+                android:hint="Id Card"
+                android:gravity="top"/>
+
+            <EditText
+                android:id="@+id/newUsernameEditText"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="55dp"
+                android:layout_alignParentTop="true"
+                android:hint="Username"
+                android:gravity="top"/>
+
+            <EditText
+                android:id="@+id/newPasswordEditText"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="55dp"
+                android:layout_alignParentTop="true"
+                android:hint="Password"
+                android:gravity="top"/>
+
+            <!--  <EditText
+                 android:id="@+id/datePicker"
+                 android:layout_width="300dp"
+                 android:layout_height="50dp"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="55dp"
+                 android:layout_alignParentTop="true"
+                 android:layout_marginTop="550dp"
+                 android:hint="Gender"
+                 android:gravity="top"/> -->
+
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="3dp"
+                android:hint=" Date of Birth"
+                android:textSize="17dp" />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="174dp"
+                android:layout_marginTop="1dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="55dp"
+                android:hint=" Gender"
+                android:textSize="17dp" />
+
+            <RadioGroup
+                android:id="@+id/genderRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="54dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/maleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/femaleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+
+                <RadioButton
+                    android:id="@+id/otherRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Other" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/registerUserButton"
+                android:layout_width="279dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#11A4AC"
+                android:gravity="center"
+                android:text="Register" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
