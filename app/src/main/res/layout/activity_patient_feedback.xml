@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-530dp"
+        android:layout_marginRight="-5dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
+        android:src="@drawable/rectangleblue" />
+
+    <View
+        android:id="@+id/image_head"
+        android:layout_width="123dp"
+        android:layout_height="127dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/head" />
+
+    <TextView
+        android:id="@+id/phobia_app"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Phobia App"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColorHint="#FFFFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/patientfeeback"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Patient Feedback"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColorHint="#FFFFFFFF"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/question1EditText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="225dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Do you know the origin or reason behind your phobia?"/>
+
+        <EditText
+            android:id="@+id/question2EditText"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="310dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Can you describe any patterns in your feelings or reactions when exposed to the test?" />
+
+        <EditText
+            android:id="@+id/question3EditText"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="410dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Do you think that a deeper understanding of the evolution of phobia through tests could influence the way you deal with fear?" />
+
+        <EditText
+            android:id="@+id/question4EditText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="510dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Have you noticed any variation in the intensity of your phobia over several tests?" />
+
+        <!-- Adicionei ids únicos para os botões -->
+        <Button
+            android:id="@+id/endButton"
+            android:layout_width="300dp"
+            android:layout_marginLeft="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="600dp"
+            android:backgroundTint="#11A4AC"
+            android:gravity="center"
+            android:text="End" />
+
+        <Button
+            android:id="@+id/sendInformationButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="650dp"
+            android:backgroundTint="#A9ACAC"
+            android:gravity="center"
+            android:text="Send to Health Professional" />
+
+    </RelativeLayout>
+</RelativeLayout>

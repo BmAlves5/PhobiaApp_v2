@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="spider_images">
+        <item>@drawable/spiderlevel1</item>
+        <item>@drawable/spiderlevel2</item>
+        <item>@drawable/spiderlevel3</item>
+        <item>@drawable/spiderlevel4</item>
+        <item>@drawable/spiderlevel5</item>
+    </array>
+</resources>
