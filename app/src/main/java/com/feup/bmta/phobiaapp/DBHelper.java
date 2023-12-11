@@ -10,7 +10,7 @@ import Bio.Library.namespace.BioLib;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ECGData.db";
-    private static final int DATABASE_VERSION = 30;
+    private static final int DATABASE_VERSION = 35;
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
     private static final String TABLE_ECG_DATA = "ecg_data";
@@ -101,6 +101,8 @@ public class DBHelper extends SQLiteOpenHelper {
     // Método para adicionar dados QRS à tabela ECG
     public void addQRSData(BioLib.QRS qrs) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+
         ContentValues values = new ContentValues();
         values.put(COLUMN_ECG, String.valueOf(qrs.rr)); // Armazena o valor R-R (qrs.rr)
         db.insert(TABLE_ECG_DATA, null, values);

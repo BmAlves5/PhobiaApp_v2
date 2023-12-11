@@ -394,7 +394,6 @@ public class BluetoothService extends Activity {
                     BioLib.QRS qrs = (BioLib.QRS) msg.obj;
                     // textHR.setText("PEAK: " + qrs.position + "  BPMi: " + qrs.bpmi + " bpm  BPM: " + qrs.bpm + " bpm  R-R: " + qrs.rr + " ms");
 
-
                     dbHelper.addQRSData(qrs);
                     break;
 
