@@ -110,7 +110,7 @@ public class SpiderGameActivity extends AppCompatActivity {
 
 
 
-    private void setButtonVisibility(int visibility) {
+   /* private void setButtonVisibility(int visibility) {
         Button homeButton = findViewById(R.id.homeButton);
         Button accountButton = findViewById(R.id.accountButton);
         Button exitButton = findViewById(R.id.exitButton);
@@ -118,7 +118,7 @@ public class SpiderGameActivity extends AppCompatActivity {
         homeButton.setVisibility(visibility);
         accountButton.setVisibility(visibility);
         exitButton.setVisibility(visibility);
-    }
+    }*/
 
     public void startGame(int level) {
         for (Button button : levelButtons) {
