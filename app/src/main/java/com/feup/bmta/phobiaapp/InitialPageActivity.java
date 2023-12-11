@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,16 +45,6 @@ public class InitialPageActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para acessar a conta do usuário
-        Button accountButton = findViewById(R.id.accountButton);
-        accountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Ação quando o botão "Account" é clicado
-                startActivity(new Intent(InitialPageActivity.this, AccountActivity.class));
-            }
-        });
-
         // Botão para sair do aplicativo
         Button exitButton = findViewById(R.id.exitButton);
 
@@ -63,5 +54,31 @@ public class InitialPageActivity extends AppCompatActivity {
                 DialogUtils.showExitConfirmationDialog(InitialPageActivity.this, LoginActivity.class);
             }
         });
+
+        // Botão para acessar a conta do usuário
+        Button accountButton = findViewById(R.id.accountButton);
+        accountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Obtém o ID do usuário de onde você o tem
+                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
+
+                // Use o DBHelper para obter os detalhes do usuário
+                DBHelper dbHelper = new DBHelper(InitialPageActivity.this);
+                User userAccount = dbHelper.getUserById(userId);
+
+                // Inicia a AccountActivity e passa o ID do usuário como extra
+                Intent intent = new Intent(InitialPageActivity.this, AccountActivity.class);
+                intent.putExtra("USER_ID", userId);
+
+                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                if (userAccount != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(InitialPageActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }

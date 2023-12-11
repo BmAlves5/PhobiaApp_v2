@@ -59,6 +59,10 @@ public class SpiderGameActivity extends AppCompatActivity {
 
         for (int i = 0; i < levelButtons.length; i++) {
             final int level = i + 1;
+
+            // Adicione as tags aqui
+            levelButtons[i].setTag(String.valueOf(level));
+
             levelButtons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,12 +73,10 @@ public class SpiderGameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra("level")) {
-            int level = intent.getIntExtra("level", 1); // O segundo parâmetro é o valor padrão se "level" não estiver presente
+            int level = intent.getIntExtra("level", 1);
             showSpiders(level);
             startGame(level);
         }
-
-
 
 
 
@@ -87,13 +89,27 @@ public class SpiderGameActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para acessar a conta do usuário
         Button accountButton = findViewById(R.id.accountButton);
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Ação quando o botão "Account" é clicado
-                startActivity(new Intent(SpiderGameActivity.this, AccountActivity.class));
+                // Obtém o ID do usuário de onde você o tem
+                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
+
+                // Use o DBHelper para obter os detalhes do usuário
+                DBHelper dbHelper = new DBHelper(SpiderGameActivity.this);
+                User userAccount = dbHelper.getUserById(userId);
+
+                // Inicia a AccountActivity e passa o ID do usuário como extra
+                Intent intent = new Intent(SpiderGameActivity.this, AccountActivity.class);
+                intent.putExtra("USER_ID", userId);
+
+                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                if (userAccount != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(SpiderGameActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -104,6 +120,17 @@ public class SpiderGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DialogUtils.showExitConfirmationDialog(SpiderGameActivity.this, LoginActivity.class);
+            }
+        });
+
+        // Inicialize o botão "Next"
+        nextButton = findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Ação quando o botão "Next" é clicado
+                Intent resultIntent = new Intent(SpiderGameActivity.this, ResultActivity.class);
+                startActivity(resultIntent);
             }
         });
     }
@@ -130,7 +157,7 @@ public class SpiderGameActivity extends AppCompatActivity {
         timer = new CountDownTimer(20000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (random.nextBoolean()) { // Probabilidade de 50%
+                if (random.nextBoolean()) {
                     showSpiders(currentLevel);
                 } else {
                     hideSpiders();
@@ -140,7 +167,9 @@ public class SpiderGameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 Toast.makeText(SpiderGameActivity.this, "Tempo esgotado! Jogo terminado.", Toast.LENGTH_SHORT).show();
-                restartGame();
+
+                // Tornar o botão "Next" visível quando o jogo terminar
+                nextButton.setVisibility(View.VISIBLE);
             }
         };
 
@@ -180,19 +209,11 @@ public class SpiderGameActivity extends AppCompatActivity {
             vibrator.vibrate(500);
         }
     }
-    private void restartGame() {
-        for (Button button : levelButtons) {
-            button.setEnabled(true);
-        }
 
-        imageView.setImageDrawable(null); // Limpa a imagem
-        timer.cancel(); // Para o temporizador, se estiver em execução
-    }
 
     private void showInstructions() {
         Intent intent = new Intent(SpiderGameActivity.this, BluetoothService.class);
         startActivity(intent);
     }
-
 
 }

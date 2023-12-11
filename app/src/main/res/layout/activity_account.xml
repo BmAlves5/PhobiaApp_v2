@@ -144,7 +144,7 @@
             android:textSize="15dp" />
 
         <Button
-            android:id="@+id/homegreyButton"
+            android:id="@+id/homeButton"
             android:layout_width="44dp"
             android:layout_height="51dp"
             android:layout_marginLeft="89dp"

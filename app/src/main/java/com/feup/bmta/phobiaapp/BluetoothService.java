@@ -179,13 +179,13 @@ public class BluetoothService extends Activity {
 
         buttonConnect.setEnabled(false);  // Disable the button initially
 
-        Button btnStartTest = findViewById(R.id.btnStartTest);
+        /*Button btnStartTest = findViewById(R.id.btnStartTest);
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startGameButtonClick(v);
             }
-        });
+        });*/
     }
 
     // The Handler that gets information back from the BioLib
@@ -497,7 +497,7 @@ public class BluetoothService extends Activity {
 
     public void startGameButtonClick(View view) {
         Intent intent = new Intent(this, SpiderGameActivity.class);
-        intent.putExtra("level",2);
+        intent.putExtra("level",1);
         startActivity(intent);
     }
 }
