@@ -38,13 +38,7 @@ public class SpiderGameActivity extends AppCompatActivity {
     // Intervalos para cada nível
     private final int[] levelIntervals = {2000, 2500, 3000, 2000, 2000}; // Adicione mais intervalos conforme necessário
 
-    private int[] spiderImages = {
-            R.drawable.spiderlevel1,
-            R.drawable.spiderlevel2,
-            R.drawable.spiderlevel3,
-            R.drawable.spiderlevel4,
-            R.drawable.spiderlevel5
-    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +66,17 @@ public class SpiderGameActivity extends AppCompatActivity {
                 }
             });
         }
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("level")) {
+            int level = intent.getIntExtra("level", 1); // O segundo parâmetro é o valor padrão se "level" não estiver presente
+            showSpiders(level);
+            startGame(level);
+        }
+
+
+
+
 
         Button homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -145,19 +150,25 @@ public class SpiderGameActivity extends AppCompatActivity {
 
 
     private void showSpiders(int level) {
-        String imageName = "spiderlevel" + level; // Ajuste o nome das imagens conforme necessário
+        if (level >= 1 && level <= spiderImages.length) {
+            int resID = spiderImages[level - 1]; // O índice no array é level - 1
 
-        int resID = getResources().getIdentifier(imageName, "drawable", getPackageName());
-
-        if (resID != 0) {
             Drawable imagem = getResources().getDrawable(resID);
             imageView.setImageDrawable(imagem);
             vibrateDevice();
         } else {
-            // Trate o caso em que o recurso não foi encontrado
-            Toast.makeText(this, "Recurso não encontrado: " + imageName, Toast.LENGTH_SHORT).show();
+            // Trate o caso em que o nível é inválido
+            Toast.makeText(this, "Nível inválido: " + level, Toast.LENGTH_SHORT).show();
         }
     }
+
+    private int[] spiderImages = {
+            R.drawable.spiderlevel1,
+            R.drawable.spiderlevel2,
+            R.drawable.spiderlevel3,
+            R.drawable.spiderlevel4,
+            R.drawable.spiderlevel5
+    };
 
     private void hideSpiders() {
         imageView.setImageDrawable(null);
@@ -182,4 +193,6 @@ public class SpiderGameActivity extends AppCompatActivity {
         Intent intent = new Intent(SpiderGameActivity.this, BluetoothService.class);
         startActivity(intent);
     }
+
+
 }
