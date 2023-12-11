@@ -1,13 +1,18 @@
 package com.feup.bmta.phobiaapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,29 +25,46 @@ public class SpiderGameActivity extends AppCompatActivity {
     private int currentLevel = 0;
     private Handler handler;
     private Random random;
+
+    private Vibrator vibrator;
     private RelativeLayout spidersLayout;
     private Button[] levelButtons;
+
+    private ImageView imageView;
+
+    private CountDownTimer timer;
     private Button nextButton;
 
     // Intervalos para cada nível
     private final int[] levelIntervals = {2000, 2500, 3000, 2000, 2000}; // Adicione mais intervalos conforme necessário
 
+    private int[] spiderImages = {
+            R.drawable.spiderlevel1,
+            R.drawable.spiderlevel2,
+            R.drawable.spiderlevel3,
+            R.drawable.spiderlevel4,
+            R.drawable.spiderlevel5
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spider_game);
-        levelTextView = findViewById(R.id.levelTextView);
-        spidersLayout = findViewById(R.id.spidersLayout);
-        handler = new Handler();
+
+        levelButtons = new Button[]{
+                findViewById(R.id.levelButton1),
+                findViewById(R.id.levelButton2),
+                findViewById(R.id.levelButton3),
+                findViewById(R.id.levelButton4),
+                findViewById(R.id.levelButton5),
+        };
+        imageView = findViewById(R.id.imageView);
+
         random = new Random();
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        // Configurar botões para cada nível
-        levelButtons = new Button[5];
-        for (int i = 0; i < 5; i++) {
-            int buttonId = getResources().getIdentifier("levelButton" + (i + 1), "id", getPackageName());
-            levelButtons[i] = findViewById(buttonId);
-
-            final int level = i;
+        for (int i = 0; i < levelButtons.length; i++) {
+            final int level = i + 1;
             levelButtons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -51,14 +73,6 @@ public class SpiderGameActivity extends AppCompatActivity {
             });
         }
 
-        // Mantenha apenas a chamada dentro do bloco if
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("level")) {
-            int selectedLevel = intent.getIntExtra("level", 0);
-            startGame(selectedLevel);
-        }
-
-        // Botão para ir para a página inicial
         Button homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,133 +94,92 @@ public class SpiderGameActivity extends AppCompatActivity {
 
         // Botão para sair do aplicativo
         Button exitButton = findViewById(R.id.exitButton);
+
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Ação quando o botão "Exit" é clicado
-                finish(); // Fecha a atividade atual
+                DialogUtils.showExitConfirmationDialog(SpiderGameActivity.this, LoginActivity.class);
             }
         });
     }
 
-    private void startGame(int level) {
-        currentLevel = level;
-        levelTextView.setText(getString(R.string.level, currentLevel + 1));
 
-        // Torna todos os botões invisíveis
+
+    private void setButtonVisibility(int visibility) {
+        Button homeButton = findViewById(R.id.homeButton);
+        Button accountButton = findViewById(R.id.accountButton);
+        Button exitButton = findViewById(R.id.exitButton);
+
+        homeButton.setVisibility(visibility);
+        accountButton.setVisibility(visibility);
+        exitButton.setVisibility(visibility);
+    }
+
+    public void startGame(int level) {
         for (Button button : levelButtons) {
-            button.setVisibility(View.GONE);
+            button.setEnabled(false);
         }
 
-        handler.postDelayed(new Runnable() {
+        currentLevel = level;
+
+        timer = new CountDownTimer(20000, 1000) {
             @Override
-            public void run() {
-                showSpiders();
-            }
-        }, getInterval());
-    }
-
-    private void showSpiders() {
-        int maxSpiderCount = Math.min(spiderCounts[currentLevel], 2);
-
-        spidersLayout.removeAllViews(); // Limpa as aranhas existentes
-
-        int totalDuration = 0;
-
-        for (int i = 0; i < maxSpiderCount; i++) {
-            final ImageView spiderImageView = new ImageView(SpiderGameActivity.this);
-            spiderImageView.setImageResource(R.drawable.aranha);
-
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-            int maxWidth = spidersLayout.getWidth() - spiderImageView.getWidth();
-            int maxHeight = spidersLayout.getHeight() - spiderImageView.getHeight();
-
-            if (maxWidth > 0 && maxHeight > 0) {
-                layoutParams.topMargin = Math.min(random.nextInt(maxHeight), maxHeight - spiderImageView.getHeight());
-                layoutParams.leftMargin = Math.min(random.nextInt(maxWidth), maxWidth - spiderImageView.getWidth());
-            }
-
-            spiderImageView.setLayoutParams(layoutParams);
-
-            // Define o índice Z para evitar sobreposição
-            spiderImageView.setZ(i);
-
-            spidersLayout.addView(spiderImageView);
-
-            // Adiciona um efeito de aparecer e desaparecer
-            spiderImageView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    spiderImageView.setVisibility(View.INVISIBLE);
-                }
-            }, 4000); // Tempo em milissegundos antes de desaparecer (4 segundos)
-
-            int spiderInterval = random.nextInt(4000) + 1000; // Intervalo entre 1 e 4 segundos
-            totalDuration += spiderInterval;
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // Remove a aranha após o intervalo específico
-                    spidersLayout.removeView(spiderImageView);
-                }
-            }, totalDuration);
-        }
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (currentLevel < 4) {
-                    startGame(currentLevel + 1);
+            public void onTick(long millisUntilFinished) {
+                if (random.nextBoolean()) { // Probabilidade de 50%
+                    showSpiders(currentLevel);
                 } else {
-                    showNextButton();  // Mostrar o botão "Next" quando o jogo for concluído
+                    hideSpiders();
                 }
             }
-        }, Math.min(getIntervalForLevel(currentLevel), 20000)); // Limite de 20 segundos por nível
+
+            @Override
+            public void onFinish() {
+                Toast.makeText(SpiderGameActivity.this, "Tempo esgotado! Jogo terminado.", Toast.LENGTH_SHORT).show();
+                restartGame();
+            }
+        };
+
+        timer.start();
     }
 
-    // Defina a lógica para obter o intervalo desejado com base no nível
-    private int getIntervalForLevel(int level) {
-        return levelIntervals[level];
-    }
 
-    private void nextLevel() {
-        if (currentLevel < 4) { // Se não estiver no último nível
-            currentLevel++;
-            startGame(currentLevel);
+
+    private void showSpiders(int level) {
+        String imageName = "spiderlevel" + level; // Ajuste o nome das imagens conforme necessário
+
+        int resID = getResources().getIdentifier(imageName, "drawable", getPackageName());
+
+        if (resID != 0) {
+            Drawable imagem = getResources().getDrawable(resID);
+            imageView.setImageDrawable(imagem);
+            vibrateDevice();
         } else {
-            // Jogo concluído
-            levelTextView.setText(getString(R.string.game_completed));
-            showNextButton(); // Mostrar o botão "Next"
+            // Trate o caso em que o recurso não foi encontrado
+            Toast.makeText(this, "Recurso não encontrado: " + imageName, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private int getInterval() {
-        return random.nextInt(3000) + 1000; // Intervalo aleatório entre 1 e 4 segundos
+    private void hideSpiders() {
+        imageView.setImageDrawable(null);
     }
 
-    private void showNextButton() {
-        nextButton.setVisibility(View.VISIBLE);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showResultActivity();
-            }
-        });
+    private void vibrateDevice() {
+        if (vibrator != null && vibrator.hasVibrator()) {
+            // Vibre por 500 milissegundos (0,5 segundos)
+            vibrator.vibrate(500);
+        }
     }
+    private void restartGame() {
+        for (Button button : levelButtons) {
+            button.setEnabled(true);
+        }
 
-    private void showResultActivity() {
-        Intent intent = new Intent(SpiderGameActivity.this, ResultActivity.class);
-        startActivity(intent);
+        imageView.setImageDrawable(null); // Limpa a imagem
+        timer.cancel(); // Para o temporizador, se estiver em execução
     }
 
     private void showInstructions() {
         Intent intent = new Intent(SpiderGameActivity.this, BluetoothService.class);
         startActivity(intent);
     }
-
-
 }

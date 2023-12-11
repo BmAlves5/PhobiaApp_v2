@@ -56,11 +56,11 @@ public class InitialPageActivity extends AppCompatActivity {
 
         // Botão para sair do aplicativo
         Button exitButton = findViewById(R.id.exitButton);
+
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Ação quando o botão "Exit" é clicado
-                finish(); // Fecha a atividade atual
+                DialogUtils.showExitConfirmationDialog(InitialPageActivity.this, LoginActivity.class);
             }
         });
     }

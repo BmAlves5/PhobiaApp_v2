@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -67,7 +70,7 @@ public class BluetoothService extends Activity {
     private BioLib.DataACC dataACC = null;
     private String deviceId = "";
     private String firmwareVersion = "";
-    private byte accSensibility = 1;	// NOTE: 2G= 0, 4G= 1
+    private byte accSensibility = 1;    // NOTE: 2G= 0, 4G= 1
     private byte typeRadioEvent = 0;
     private byte[] infoRadioEvent = null;
     private short countEvent = 0;
@@ -80,8 +83,6 @@ public class BluetoothService extends Activity {
     private String accConf = "";
 
     private DBHelper dbHelper;
-
-
 
 
     private SQLiteDatabase mDatabase;
@@ -242,13 +243,10 @@ public class BluetoothService extends Activity {
         }
     };*/
 
-    private final Handler mHandler = new Handler()
-    {
+    private final Handler mHandler = new Handler() {
         @Override
-        public void handleMessage(Message msg)
-        {
-            switch (msg.what)
-            {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
              /*   case BioLib.MESSAGE_READ:
                     textDataReceived.setText("RECEIVED: " + msg.arg1);
                     break;
@@ -393,8 +391,9 @@ public class BluetoothService extends Activity {
                     break;*/
 
                 case BioLib.MESSAGE_PEAK_DETECTION:
-                    BioLib.QRS qrs = (BioLib.QRS)msg.obj;
-                   // textHR.setText("PEAK: " + qrs.position + "  BPMi: " + qrs.bpmi + " bpm  BPM: " + qrs.bpm + " bpm  R-R: " + qrs.rr + " ms");
+                    BioLib.QRS qrs = (BioLib.QRS) msg.obj;
+                    // textHR.setText("PEAK: " + qrs.position + "  BPMi: " + qrs.bpmi + " bpm  BPM: " + qrs.bpm + " bpm  R-R: " + qrs.rr + " ms");
+
 
                     dbHelper.addQRSData(qrs);
                     break;
@@ -413,13 +412,12 @@ public class BluetoothService extends Activity {
 
 
                 case BioLib.MESSAGE_ECG_STREAM:
-                    try
-                    {
+                    try {
                         textECG.setText("ECG received");
                         ecg = (byte[][]) msg.obj;
                         int nLeads = ecg.length;
                         nBytes = ecg[0].length;
-                     //   textECG.setText("ECG stream: OK   nBytes: " + nBytes + "   nLeads: " + nLeads);
+                        //   textECG.setText("ECG stream: OK   nBytes: " + nBytes + "   nLeads: " + nLeads);
 
                         // Store ECG data in SQLite database
                         // Convert ECG data to a suitable format (e.g., String)
@@ -430,12 +428,7 @@ public class BluetoothService extends Activity {
                         // Store ECG data in SQLite database
 
 
-
-
-
-                    }
-                    catch (Exception ex)
-                    {
+                    } catch (Exception ex) {
                         //textECG.setText("ERROR in ecg stream");
                     }
                     break;
@@ -479,6 +472,16 @@ public class BluetoothService extends Activity {
         super.onDestroy();
 
         if (lib.mBluetoothAdapter != null) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             lib.mBluetoothAdapter.cancelDiscovery();
         }
 
