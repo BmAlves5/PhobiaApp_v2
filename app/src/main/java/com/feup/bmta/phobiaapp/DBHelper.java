@@ -159,12 +159,13 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Método para obter detalhes do usuário pelo ID
+    // Método para obter detalhes do usuário pelo ID
     public User getUserById(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         User user = null;
 
         // Colunas que você deseja recuperar
-        String[] projection = {COLUMN_FULL_NAME, COLUMN_DATE_OF_BIRTH, COLUMN_GENDER, COLUMN_ID_CARD_NUMBER, COLUMN_USERNAME};
+        String[] projection = {COLUMN_ID, COLUMN_FULL_NAME, COLUMN_DATE_OF_BIRTH, COLUMN_GENDER, COLUMN_ID_CARD_NUMBER, COLUMN_USERNAME};
 
         // Cláusula WHERE para filtrar pelos dados do usuário
         String selection = COLUMN_ID + " = ?";
@@ -176,6 +177,7 @@ public class DBHelper extends SQLiteOpenHelper {
         // Verifica se há uma linha correspondente
         if (cursor.moveToFirst()) {
             // Obtém os valores das colunas
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
             String fullName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FULL_NAME));
             String dateOfBirth = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE_OF_BIRTH));
             String gender = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GENDER));
@@ -183,7 +185,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME));
 
             // Cria uma instância de User usando o construtor apropriado
-            user = new User(fullName, dateOfBirth, gender, idCardNumber, username);
+            user = new User(id, fullName, dateOfBirth, gender, idCardNumber, username);
         }
 
         // Fecha o cursor e o banco de dados
@@ -192,6 +194,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return user;
     }
+
+
+
 
 
 
