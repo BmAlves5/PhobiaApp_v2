@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (userId != -1) {
                     String ecgData = dbHelper.getECGData(userId);
 
-                    Toast.makeText(LoginActivity.this, "Dados do ECG: " + ecgData, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "ECG Date: " + ecgData, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(LoginActivity.this, InitialPageActivity.class);
                     intent.putExtra("USER_ID", userId);
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     // Credenciais incorretas, exiba mensagem de erro
-                    Toast.makeText(LoginActivity.this, "Credenciais incorretas. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Incorrect credentials. Please try again.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

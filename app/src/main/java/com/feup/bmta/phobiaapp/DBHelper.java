@@ -10,7 +10,7 @@ import Bio.Library.namespace.BioLib;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ECGData.db";
-    private static final int DATABASE_VERSION = 35;
+    private static final int DATABASE_VERSION = 38;
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
     private static final String TABLE_ECG_DATA = "ecg_data";

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class SpiderGameActivity extends AppCompatActivity {
@@ -35,6 +37,10 @@ public class SpiderGameActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private Button nextButton;
 
+
+
+    private DBHelper dbHelper;
+
     // Intervalos para cada nível
     private final int[] levelIntervals = {2000, 2500, 3000, 2000, 2000}; // Adicione mais intervalos conforme necessário
 
@@ -52,6 +58,7 @@ public class SpiderGameActivity extends AppCompatActivity {
                 findViewById(R.id.levelButton4),
                 findViewById(R.id.levelButton5),
         };
+
         imageView = findViewById(R.id.imageView);
 
         random = new Random();
@@ -59,6 +66,11 @@ public class SpiderGameActivity extends AppCompatActivity {
 
         for (int i = 0; i < levelButtons.length; i++) {
             final int level = i + 1;
+
+
+            // Adicione as tags aqui
+            levelButtons[i].setTag(String.valueOf(level));
+
             levelButtons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,12 +81,10 @@ public class SpiderGameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra("level")) {
-            int level = intent.getIntExtra("level", 1); // O segundo parâmetro é o valor padrão se "level" não estiver presente
+            int level = intent.getIntExtra("level", 1);
             showSpiders(level);
             startGame(level);
         }
-
-
 
 
 
@@ -106,6 +116,22 @@ public class SpiderGameActivity extends AppCompatActivity {
                 DialogUtils.showExitConfirmationDialog(SpiderGameActivity.this, LoginActivity.class);
             }
         });
+
+        // Inicialize o botão "Next"
+        nextButton = findViewById(R.id.nextButton);
+        // No método onCreate, após a inicialização do botão "Next"
+        nextButton.setVisibility(View.INVISIBLE); // Torna o botão invisível inicialmente
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Ação quando o botão "Next" é clicado
+                Intent resultIntent = new Intent(SpiderGameActivity.this, ResultActivity.class);
+                startActivity(resultIntent);
+            }
+        });
+
+
     }
 
 
@@ -121,16 +147,39 @@ public class SpiderGameActivity extends AppCompatActivity {
     }*/
 
     public void startGame(int level) {
+
         for (Button button : levelButtons) {
-            button.setEnabled(false);
+            //button.setEnabled(false);
+            button.setVisibility(View.INVISIBLE);
         }
+
+        Button accountButton = findViewById(R.id.accountButton);
+        accountButton.setVisibility(View.INVISIBLE);
+
+        Button homeButton = findViewById(R.id.homeButton);
+        homeButton.setVisibility(View.INVISIBLE);
+
+        Button exitButton = findViewById(R.id.exitButton);
+        exitButton.setVisibility(View.INVISIBLE);
+
+        TextView account =findViewById(R.id.account);
+        account.setVisibility(View.INVISIBLE);
+
+        TextView home =findViewById(R.id.home);
+        home.setVisibility(View.INVISIBLE);
+
+        TextView exit =findViewById(R.id.exit);
+        exit.setVisibility(View.INVISIBLE);
+
+        ImageView baseImageView = findViewById(R.id.base);
+        baseImageView.setVisibility(View.INVISIBLE);
 
         currentLevel = level;
 
         timer = new CountDownTimer(20000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (random.nextBoolean()) { // Probabilidade de 50%
+                if (random.nextBoolean()) {
                     showSpiders(currentLevel);
                 } else {
                     hideSpiders();
@@ -139,12 +188,30 @@ public class SpiderGameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Toast.makeText(SpiderGameActivity.this, "Tempo esgotado! Jogo terminado.", Toast.LENGTH_SHORT).show();
-                restartGame();
+                Toast.makeText(SpiderGameActivity.this, "Time's up! Game over.", Toast.LENGTH_SHORT).show();
+
+                // Mostrar a ImageView com ID "base" após o jogo terminar
+                baseImageView.setVisibility(View.VISIBLE);
+
+                // Tornar o botão "Next" visível quando o jogo terminar
+                nextButton.setVisibility(View.VISIBLE);
+
+                // Mostrar os botões e o TextView após o jogo terminar
+
+
+                account.setVisibility(View.VISIBLE);
+                home.setVisibility(View.VISIBLE);
+                exit.setVisibility(View.VISIBLE);
+                accountButton.setVisibility(View.VISIBLE);
+                homeButton.setVisibility(View.VISIBLE);
+                exitButton.setVisibility(View.VISIBLE);
+
+
             }
         };
 
         timer.start();
+
     }
 
 
@@ -158,7 +225,7 @@ public class SpiderGameActivity extends AppCompatActivity {
             vibrateDevice();
         } else {
             // Trate o caso em que o nível é inválido
-            Toast.makeText(this, "Nível inválido: " + level, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid level: " + level, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -180,19 +247,11 @@ public class SpiderGameActivity extends AppCompatActivity {
             vibrator.vibrate(500);
         }
     }
-    private void restartGame() {
-        for (Button button : levelButtons) {
-            button.setEnabled(true);
-        }
 
-        imageView.setImageDrawable(null); // Limpa a imagem
-        timer.cancel(); // Para o temporizador, se estiver em execução
-    }
 
     private void showInstructions() {
         Intent intent = new Intent(SpiderGameActivity.this, BluetoothService.class);
         startActivity(intent);
     }
-
 
 }
