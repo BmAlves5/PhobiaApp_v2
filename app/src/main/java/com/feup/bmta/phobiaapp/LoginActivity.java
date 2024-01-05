@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     // Salve o status de registro no SharedPreferences
                     SharedPreferences sharedPreferences = getSharedPreferences("MinhasPreferencias", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("registrado", true);
+                    editor.putBoolean("registado", true);
                     editor.apply();
 
                     // Vá para a página inicial
