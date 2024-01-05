@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="-530dp"
+        android:layout_marginTop="-700dp"
         android:layout_marginRight="-5dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:foregroundTint="#FFFFFF"
-        android:src="@drawable/rectangleblue" />
+        android:src="@drawable/retangulo_inicialat" />
 
     <View
         android:id="@+id/image_head"
@@ -62,7 +62,7 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginTop="200dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:hint="The following image shows the correct placement of the electrodes"
             android:scaleType="centerCrop" />
 
@@ -71,7 +71,7 @@
             android:layout_width="350dp"
             android:layout_height="145dp"
             android:layout_marginTop="250dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="25dp"
             android:scaleType="centerCrop"
             android:src="@drawable/eletrodos" />
 
@@ -80,26 +80,27 @@
             android:layout_width="350dp"
             android:layout_height="160dp"
             android:layout_marginTop="400dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:hint="1. Put the t-shirt on; \n2. Insert the springs inside the t-shirt into the electrodes. You should hear a click; \n3. Switch on the electronic device; \n4. Check that the electronic device has an card and connect it to the plug in the pocket of the shirt pocket; 5. Place the electronic device in the pocket with the flashing
 flashing red light facing outwards."
             android:scaleType="centerCrop" />
 
         <Button
             android:id="@+id/buttonConnect"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="550dp"
-            android:layout_marginLeft="175dp"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="600dp"
+            android:layout_marginLeft="55dp"
             android:layout_alignParentLeft="true"
             android:text="Connect" />
 
+
         <Button
             android:id="@+id/btnStartTest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="600dp"
-            android:layout_marginLeft="175dp"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="680dp"
+            android:layout_marginLeft="55dp"
             android:text="Start Test"
             android:onClick="startGameButtonClick"/>
 

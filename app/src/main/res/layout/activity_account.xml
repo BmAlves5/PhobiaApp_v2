@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="-530dp"
+        android:layout_marginTop="-700dp"
         android:layout_marginRight="-5dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:foregroundTint="#FFFFFF"
-        android:src="@drawable/rectangleblue" />
+        android:src="@drawable/retangulo_inicialat" />
 
     <View
         android:id="@+id/image_head"
@@ -102,96 +102,99 @@
             android:layout_marginTop="400dp"
             android:hint="Gender"
             android:gravity="top"/>
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTint="#FFFFFF">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#FFFFFF">
 
-        <ImageView
-            android:id="@+id/base"
-            android:layout_width="367dp"
-            android:layout_height="113dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="598dp"
-            android:background="@drawable/rectanglegrey" />
 
-        <Button
-            android:id="@+id/accountButton"
-            android:layout_width="47dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="630dp"
-            android:background="@drawable/account"
-            android:backgroundTint="#11A4AC"
-            android:elevation="10dp"
-            android:gravity="center" />
+            <ImageView
+                android:id="@+id/base"
+                android:layout_width="367dp"
+                android:layout_height="113dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="690dp"
+                android:background="@drawable/rectanglegrey" />
 
-        <TextView
-            android:id="@+id/account"
-            android:layout_width="171dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="674dp"
-            android:elevation="10dp"
-            android:gravity="center_horizontal|top"
-            android:hint="Account"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#000000"
-            android:textSize="15dp" />
+            <Button
+                android:id="@+id/accountButton"
+                android:layout_width="47dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="180dp"
+                android:layout_marginTop="723dp"
+                android:background="@drawable/account"
+                android:elevation="10dp"
+                android:gravity="center" />
 
-        <Button
-            android:id="@+id/homegreyButton"
-            android:layout_width="44dp"
-            android:layout_height="51dp"
-            android:layout_marginLeft="89dp"
-            android:layout_marginTop="632dp"
-            android:background="@drawable/homegrey"
-            android:elevation="10dp"
-            android:gravity="center" />
+            <TextView
+                android:id="@+id/account"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="767dp"
+                android:elevation="10dp"
+                android:gravity="center_horizontal|top"
+                android:hint="Account"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="#000000"
+                android:textSize="15dp" />
 
-        <TextView
-            android:id="@+id/home"
-            android:layout_width="171dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="674dp"
-            android:elevation="10dp"
-            android:gravity="center_horizontal|top"
-            android:hint="Home"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#000000"
-            android:textSize="15dp" />
+            <Button
+                android:id="@+id/homeButton"
+                android:layout_width="36dp"
+                android:layout_height="41dp"
+                android:layout_marginLeft="92dp"
+                android:layout_marginTop="725dp"
+                android:background="@drawable/homegrey"
+                android:elevation="10dp"
+                android:gravity="center" />
 
-        <Button
-            android:id="@+id/exitButton"
-            android:layout_width="53dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="275dp"
-            android:layout_marginTop="627dp"
-            android:background="@drawable/exit"
-            android:elevation="10dp"
-            android:gravity="center" />
+            <TextView
+                android:id="@+id/home"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="768dp"
+                android:elevation="10dp"
+                android:gravity="center_horizontal|top"
+                android:hint="Home"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="#000000"
+                android:textSize="15dp" />
 
-        <TextView
-            android:id="@+id/exit"
-            android:layout_width="171dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="215dp"
-            android:layout_marginTop="674dp"
-            android:elevation="10dp"
-            android:gravity="center_horizontal|top"
-            android:hint="Exit"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#000000"
-            android:textSize="15dp" />
+            <Button
+                android:id="@+id/exitButton"
+                android:layout_width="53dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="275dp"
+                android:layout_marginTop="720dp"
+                android:background="@drawable/exit"
+                android:elevation="10dp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/exit"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="215dp"
+                android:layout_marginTop="768dp"
+                android:elevation="10dp"
+                android:gravity="center_horizontal|top"
+                android:hint="Exit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 

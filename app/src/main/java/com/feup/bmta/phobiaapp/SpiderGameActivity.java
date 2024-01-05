@@ -14,9 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
+
+import Bio.Library.namespace.BioLib;
 
 public class SpiderGameActivity extends AppCompatActivity {
 
@@ -25,6 +30,10 @@ public class SpiderGameActivity extends AppCompatActivity {
     private int currentLevel = 0;
     private Handler handler;
     private Random random;
+
+    private TextView text;
+
+    private BioLib lib = null;
 
     private Vibrator vibrator;
     private RelativeLayout spidersLayout;
@@ -35,15 +44,20 @@ public class SpiderGameActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private Button nextButton;
 
+
+
+    private DBHelper dbHelper;
+
     // Intervalos para cada nível
     private final int[] levelIntervals = {2000, 2500, 3000, 2000, 2000}; // Adicione mais intervalos conforme necessário
 
-
+    private boolean gameFinished = false; // Adicione esta variável de controle
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spider_game);
+
 
         levelButtons = new Button[]{
                 findViewById(R.id.levelButton1),
@@ -52,6 +66,7 @@ public class SpiderGameActivity extends AppCompatActivity {
                 findViewById(R.id.levelButton4),
                 findViewById(R.id.levelButton5),
         };
+
         imageView = findViewById(R.id.imageView);
 
         random = new Random();
@@ -59,22 +74,24 @@ public class SpiderGameActivity extends AppCompatActivity {
 
         for (int i = 0; i < levelButtons.length; i++) {
             final int level = i + 1;
+
+            // Adicione as tags aqui
+            levelButtons[i].setTag(String.valueOf(level));
+
             levelButtons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showInstructions();
+                    startGame(level);
                 }
             });
         }
 
         Intent intent = getIntent();
         if (intent.hasExtra("level")) {
-            int level = intent.getIntExtra("level", 1); // O segundo parâmetro é o valor padrão se "level" não estiver presente
+            int level = intent.getIntExtra("level", 1);
             showSpiders(level);
             startGame(level);
         }
-
-
 
 
 
@@ -92,8 +109,23 @@ public class SpiderGameActivity extends AppCompatActivity {
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Ação quando o botão "Account" é clicado
-                startActivity(new Intent(SpiderGameActivity.this, AccountActivity.class));
+                // Obtém o ID do usuário de onde você o tem
+                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
+
+                // Use o DBHelper para obter os detalhes do usuário
+                DBHelper dbHelper = new DBHelper(SpiderGameActivity.this);
+                User userAccount = dbHelper.getUserById(userId);
+
+                // Inicia a AccountActivity e passa o ID do usuário como extra
+                Intent intent = new Intent(SpiderGameActivity.this, AccountActivity.class);
+                intent.putExtra("USER_ID", userId);
+
+                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                if (userAccount != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(SpiderGameActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -104,6 +136,42 @@ public class SpiderGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DialogUtils.showExitConfirmationDialog(SpiderGameActivity.this, LoginActivity.class);
+            }
+        });
+
+        // Inicialize o botão "Next"
+        nextButton = findViewById(R.id.nextButton);
+        // No método onCreate, após a inicialização do botão "Next"
+        nextButton.setVisibility(View.INVISIBLE); // Torna o botão invisível inicialmente
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disconnect();
+
+                // Ação quando o botão "Next" é clicado
+                Intent resultIntent = new Intent(SpiderGameActivity.this, ResultActivity.class);
+                startActivity(resultIntent);
+            }
+
+            private void disconnect() {
+                try {
+                    // Reset(); // Certifique-se de implementar o método Reset() conforme necessário
+
+                    if (lib != null) {
+                        lib.Disconnect();
+                    }
+
+                    // Defina o texto apenas se o jogo não tiver terminado
+                    if (!gameFinished) {
+                        text = findViewById(R.id.disconnect);
+                        text.setText("Bluetooth disconnected");
+                    }
+
+                } catch (Exception e) {
+                    text.setText("Error during disconnection");
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -120,17 +188,72 @@ public class SpiderGameActivity extends AppCompatActivity {
         exitButton.setVisibility(visibility);
     }*/
 
-    public void startGame(int level) {
-        for (Button button : levelButtons) {
-            button.setEnabled(false);
+/*    private void disconnect() {
+        try {
+            // Reset(); // Certifique-se de implementar o método Reset() conforme necessário
+
+            if (lib != null) {
+                lib.Disconnect();
+            }
+
+            // Defina o texto apenas se o jogo não tiver terminado
+            if (!gameFinished) {
+                text = findViewById(R.id.disconnect);
+                text.setText("Bluetooth disconnected");
+            }
+
+        } catch (Exception e) {
+            text.setText("Error during disconnection");
+            e.printStackTrace();
         }
+    }*/
+
+    public void startGame(int level) {
+
+        for (Button button : levelButtons) {
+            //button.setEnabled(false);
+            button.setVisibility(View.INVISIBLE);
+        }
+
+        Button accountButton = findViewById(R.id.accountButton);
+        accountButton.setVisibility(View.INVISIBLE);
+
+        Button homeButton = findViewById(R.id.homeButton);
+        homeButton.setVisibility(View.INVISIBLE);
+
+        Button exitButton = findViewById(R.id.exitButton);
+        exitButton.setVisibility(View.INVISIBLE);
+
+        TextView account =findViewById(R.id.account);
+        account.setVisibility(View.INVISIBLE);
+
+        TextView home =findViewById(R.id.home);
+        home.setVisibility(View.INVISIBLE);
+
+        TextView exit =findViewById(R.id.exit);
+        exit.setVisibility(View.INVISIBLE);
+
+        ImageView baseImageView = findViewById(R.id.base);
+        baseImageView.setVisibility(View.INVISIBLE);
+
+        TextView levels =findViewById(R.id.gamelevels);
+        levels.setVisibility(View.INVISIBLE);
+
+        TextView phobiaapp =findViewById(R.id.phobia_app);
+        phobiaapp.setVisibility(View.INVISIBLE);
+
+        View head =findViewById(R.id.image_head);
+        head.setVisibility(View.INVISIBLE);
+
+        ImageView imageBackground = findViewById(R.id.imageViewBackground);
+        imageBackground.setVisibility(View.INVISIBLE);
 
         currentLevel = level;
 
         timer = new CountDownTimer(20000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (random.nextBoolean()) { // Probabilidade de 50%
+                if (random.nextBoolean()) {
                     showSpiders(currentLevel);
                 } else {
                     hideSpiders();
@@ -139,13 +262,39 @@ public class SpiderGameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Toast.makeText(SpiderGameActivity.this, "Tempo esgotado! Jogo terminado.", Toast.LENGTH_SHORT).show();
-                restartGame();
+                Toast.makeText(SpiderGameActivity.this, "Time's up! Game over.", Toast.LENGTH_SHORT).show();
+
+                // Mostrar a ImageView com ID "base" após o jogo terminar
+                baseImageView.setVisibility(View.VISIBLE);
+
+                // Tornar o botão "Next" visível quando o jogo terminar
+                nextButton.setVisibility(View.VISIBLE);
+
+                // Mostrar os botões e o TextView após o jogo terminar
+
+
+                account.setVisibility(View.VISIBLE);
+                home.setVisibility(View.VISIBLE);
+                exit.setVisibility(View.VISIBLE);
+                accountButton.setVisibility(View.VISIBLE);
+                homeButton.setVisibility(View.VISIBLE);
+                exitButton.setVisibility(View.VISIBLE);
+                levels.setVisibility(View.VISIBLE);
+                phobiaapp.setVisibility(View.VISIBLE);
+                head.setVisibility(View.VISIBLE);
+                imageBackground.setVisibility(View.VISIBLE);
+
+                hideSpiders();
+
+
             }
         };
 
         timer.start();
+
     }
+
+
 
 
 
@@ -155,11 +304,29 @@ public class SpiderGameActivity extends AppCompatActivity {
 
             Drawable imagem = getResources().getDrawable(resID);
             imageView.setImageDrawable(imagem);
+
+            int screenWidth = getResources().getDisplayMetrics().widthPixels;
+            int screenHeight = getResources().getDisplayMetrics().heightPixels;
+
+            float randomX = random.nextFloat() * (screenWidth - imageView.getWidth());
+            float randomY = random.nextFloat() * (screenHeight - imageView.getHeight());
+
+            imageView.setX(randomX);
+            imageView.setY(randomY);
+
+            float randomScale = random.nextFloat() * (1.5f - 0.5f) + 0.5f; // Entre 0.5 e 1.5
+
+            imageView.setScaleX(randomScale);
+            imageView.setScaleY(randomScale);
+
+
+
             vibrateDevice();
         } else {
-            // Trate o caso em que o nível é inválido
-            Toast.makeText(this, "Nível inválido: " + level, Toast.LENGTH_SHORT).show();
+            // Trate o caso em que as dimensões são inválidas
+            Toast.makeText(this, "Invalid dimensions", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private int[] spiderImages = {
@@ -180,19 +347,35 @@ public class SpiderGameActivity extends AppCompatActivity {
             vibrator.vibrate(500);
         }
     }
-    private void restartGame() {
-        for (Button button : levelButtons) {
-            button.setEnabled(true);
-        }
 
-        imageView.setImageDrawable(null); // Limpa a imagem
-        timer.cancel(); // Para o temporizador, se estiver em execução
-    }
 
     private void showInstructions() {
         Intent intent = new Intent(SpiderGameActivity.this, BluetoothService.class);
         startActivity(intent);
     }
+
+    private static final int BLUETOOTH_REQUEST_CODE = 100; // Escolha um código apropriado
+
+    // Método para iniciar a BluetoothService com o nível selecionado
+    private void startBluetoothServiceWithLevel(int selectedLevel) {
+        Intent intent = new Intent(this, BluetoothService.class);
+        intent.putExtra("LEVEL_SELECTED", selectedLevel);
+        startActivityForResult(intent, BLUETOOTH_REQUEST_CODE);
+    }
+
+    // Método para processar o resultado da BluetoothService
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == BLUETOOTH_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            int levelSelected = data.getIntExtra("LEVEL_SELECTED", 1);
+            startBluetoothServiceWithLevel(levelSelected);
+
+            // Use o nível selecionado aqui
+        }
+    }
+
 
 
 }

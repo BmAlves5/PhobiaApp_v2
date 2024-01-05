@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                     // Inicie a nova atividade
                     startActivity(intent);
 
-                    Toast.makeText(RegisterActivity.this, "Registo bem-sucedido!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Successful registration!", Toast.LENGTH_SHORT).show();
                     finish(); // Finaliza a atividade após o registro bem-sucedido
                 }
             }
@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Verifica se o número do cartão de cidadão tem 8 dígitos
         if (idCardNumber.length() != 8 || !idCardNumber.matches("\\d+")) {
             // Mostra um aviso ao usuário
-            Toast.makeText(this, "O número do cartão de cidadão deve ter exatamente 8 dígitos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "The citizen card number must be exactly 8 digits long.", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

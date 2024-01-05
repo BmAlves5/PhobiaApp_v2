@@ -14,6 +14,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -145,6 +146,9 @@ public class BluetoothService extends Activity {
 
         dbHelper = new DBHelper(this);
         text = findViewById(R.id.lblStatus);
+        text.setVisibility(View.INVISIBLE);
+
+
         text.setText("");
 
         // MACADDRESS:
@@ -179,11 +183,21 @@ public class BluetoothService extends Activity {
 
         buttonConnect.setEnabled(false);  // Disable the button initially
 
-        Button btnStartTest = findViewById(R.id.btnStartTest);
+        /*Button btnStartTest = findViewById(R.id.btnStartTest);
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startGameButtonClick(v);
+            }
+        });*/
+
+        // Botão
+        Button btnStartTest = findViewById(R.id.btnStartTest);
+        btnStartTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Ação quando o botão
+                startActivity(new Intent(BluetoothService.this, SpiderGameActivity.class));
             }
         });
     }
@@ -495,9 +509,18 @@ public class BluetoothService extends Activity {
         lib = null;
     }
 
-    public void startGameButtonClick(View view) {
-        Intent intent = new Intent(this, SpiderGameActivity.class);
-        intent.putExtra("level",2);
-        startActivity(intent);
+    private void returnToSpiderGameActivity(int levelSelected) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("LEVEL_SELECTED", levelSelected);
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
+
+    // Método onde você pode recuperar o nível selecionado e realizar a ação necessária
+    private void processReceivedLevel() {
+        int receivedLevel = getIntent().getIntExtra("LEVEL_SELECTED", 1); // 1 é um valor padrão
+        // Faça o que for necessário com o nível recebido
+        // Por exemplo, você pode usar receivedLevel para algum processamento ou exibição
+    }
+
 }

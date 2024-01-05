@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7E7C7C">
+
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-700dp"
+        android:layout_marginRight="-5dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
+        android:src="@drawable/retangulo_inicialat" />
+
+    <View
+        android:id="@+id/image_head"
+        android:layout_width="123dp"
+        android:layout_height="127dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/head" />
+
+    <TextView
+        android:id="@+id/phobia_app"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Phobia App"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColorHint="#FFFFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/statistics"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Statistics"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColorHint="#FFFFFFFF"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/nomedografico"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="200dp"
+        android:gravity="center_horizontal|top"
+        android:hint="Stress Graphic"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <com.feup.bmta.phobiaapp.ECGChartView
+        android:id="@+id/ecgChartView"
+        android:layout_width="360dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="250dp" />
+
+    <TextView
+        android:id="@+id/explicaçãodografico"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="550dp"
+        android:hint="This graphic represents the levels of stress.
+
+        You need to train more to reduce your phobia!"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/averageTextView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="600dp"
+        android:text="Average RR values:"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

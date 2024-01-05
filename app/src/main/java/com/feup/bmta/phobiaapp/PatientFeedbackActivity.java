@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PatientFeedbackActivity extends AppCompatActivity {
 
-    private EditText question1EditText, question2EditText, question3EditText, question4EditText;
+    private EditText answer1EditText, answer2EditText, answer3EditText, answer4EditText;
+
+    private TextView question1Text, question2Text, question3Text, question4Text;
     private Button endButton, sendInformationButton;
 
     @Override
@@ -19,10 +22,17 @@ public class PatientFeedbackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_feedback);
 
         // Inicialize as variáveis com base nos IDs definidos no layout XML
-        question1EditText = findViewById(R.id.question1EditText);
-        question2EditText = findViewById(R.id.question2EditText);
-        question3EditText = findViewById(R.id.question3EditText);
-        question4EditText = findViewById(R.id.question4EditText);
+        answer1EditText = findViewById(R.id.answer1EditText);
+        answer2EditText = findViewById(R.id.answer2EditText);
+        answer3EditText = findViewById(R.id.answer3EditText);
+        answer4EditText = findViewById(R.id.answer4EditText);
+
+        // Inicialize as variáveis com base nos IDs definidos no layout XML
+        question1Text = findViewById(R.id.question1Text);
+        question2Text = findViewById(R.id.question2Text);
+        question3Text = findViewById(R.id.question3Text);
+        question4Text = findViewById(R.id.question4Text);
+
         endButton = findViewById(R.id.endButton);
         sendInformationButton = findViewById(R.id.sendInformationButton);
 

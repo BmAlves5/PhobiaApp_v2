@@ -54,8 +54,23 @@ public class ResultActivity extends AppCompatActivity {
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Ação quando o botão "Account" é clicado
-                startActivity(new Intent(ResultActivity.this, AccountActivity.class));
+                // Obtém o ID do usuário de onde você o tem
+                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
+
+                // Use o DBHelper para obter os detalhes do usuário
+                DBHelper dbHelper = new DBHelper(ResultActivity.this);
+                User userAccount = dbHelper.getUserById(userId);
+
+                // Inicia a AccountActivity e passa o ID do usuário como extra
+                Intent intent = new Intent(ResultActivity.this, AccountActivity.class);
+                intent.putExtra("USER_ID", userId);
+
+                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                if (userAccount != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ResultActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

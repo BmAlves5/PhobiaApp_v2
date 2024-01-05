@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="-530dp"
+        android:layout_marginTop="-700dp"
         android:layout_marginRight="-5dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:foregroundTint="#FFFFFF"
-        android:src="@drawable/rectangleblue" />
+        android:src="@drawable/retangulo_inicialat" />
 
     <View
         android:id="@+id/image_head"
@@ -58,15 +58,122 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <TextView
+            android:id="@+id/question1Text"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="205dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Do you know the origin or reason behind your phobia?"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
         <EditText
-            android:id="@+id/question1EditText"
+            android:id="@+id/answer1EditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="245dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Write your answer"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/question2Text"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="305dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Can you describe any patterns in your feelings or reactions when exposed to the test?"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/answer2EditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="345dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Write your answer"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/question3Text"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="410dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Do you think that a deeper understanding of the evolution of phobia through tests could influence the way you deal with fear?"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/answer3EditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="470dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Write your answer"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/question4Text"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="520dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Have you noticed any variation in the intensity of your phobia over several tests?"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/answer4EditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="560dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Write your answer"
+            android:textSize="15dp"/>
+
+
+
+        <!--<TextView
+            android:id="@+id/question2EditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="225dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:gravity="top"
-            android:hint="Do you know the origin or reason behind your phobia?"/>
+            android:hint="Do you know the origin or reason behind your phobia?"
+            android:textSize="15dp"/>
+
+        <EditText
+            android:id="@+id/answer1EditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="265dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="top"
+            android:hint="Write your answer"
+            android:textSize="15dp"/>
 
         <EditText
             android:id="@+id/question2EditText"
@@ -97,14 +204,14 @@
             android:layout_marginRight="30dp"
             android:gravity="top"
             android:hint="Have you noticed any variation in the intensity of your phobia over several tests?" />
-
+-->
         <!-- Adicionei ids únicos para os botões -->
         <Button
             android:id="@+id/endButton"
             android:layout_width="300dp"
             android:layout_marginLeft="55dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="600dp"
+            android:layout_marginTop="650dp"
             android:backgroundTint="#11A4AC"
             android:gravity="center"
             android:text="End" />
@@ -114,7 +221,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="55dp"
-            android:layout_marginTop="650dp"
+            android:layout_marginTop="700dp"
             android:backgroundTint="#A9ACAC"
             android:gravity="center"
             android:text="Send to Health Professional" />
