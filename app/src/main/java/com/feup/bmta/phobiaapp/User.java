@@ -7,8 +7,11 @@ public class User {
     private String idCardNumber;
     private String username;
 
+    private long id;
+
     // Construtor
-    public User(String fullName, String dateOfBirth, String gender, String idCardNumber, String username) {
+    public User(long id, String fullName, String dateOfBirth, String gender, String idCardNumber, String username) {
+        this.id= id;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;

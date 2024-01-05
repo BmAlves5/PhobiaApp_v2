@@ -49,7 +49,6 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para acessar a conta do usuário
         Button accountButton = findViewById(R.id.accountButton);
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
