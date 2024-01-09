@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,7 +49,8 @@ public class PatientFeedbackActivity extends AppCompatActivity {
         sendInformationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(com.feup.bmta.phobiaapp.PatientFeedbackActivity.this, ResultActivity.class));
+                // Mostrar mensagem usando um Toast
+                Toast.makeText(PatientFeedbackActivity.this, "Your data has been sent to a health professional", Toast.LENGTH_SHORT).show();
             }
         });
     }

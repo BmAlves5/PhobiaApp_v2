@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class InitialPageActivity extends AppCompatActivity {
 
     @Override
@@ -30,8 +32,15 @@ public class InitialPageActivity extends AppCompatActivity {
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Ação quando o botão "Histórico" é clicado
-                startActivity(new Intent(InitialPageActivity.this, HistoryActivity.class));
+                // Obtendo os valores do ECG e SDNN
+             //   ArrayList<Integer> ecgDataValues = getEcgDataValues();
+             //   ArrayList<Double> sdnnValues = getSDNNValues(ecgDataValues);
+
+                // Iniciando a HistoryActivity e passando os dados do ECG e SDNN via Intent
+                Intent intent = new Intent(InitialPageActivity.this, HistoryActivity.class);
+            //    intent.putIntegerArrayListExtra("ECG_DATA_VALUES", ecgDataValues);
+             //   intent.putDoubleArrayListExtra("SDNN_VALUES", sdnnValues);
+                startActivity(intent);
             }
         });
 

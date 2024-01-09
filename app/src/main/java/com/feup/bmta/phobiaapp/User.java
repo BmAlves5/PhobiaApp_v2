@@ -10,7 +10,7 @@ public class User {
     private long id;
 
     // Construtor
-    public User(long id, String fullName, String dateOfBirth, String gender, String idCardNumber, String username) {
+    public User(String fullName, String dateOfBirth, String gender, String idCardNumber, String username) {
         this.id= id;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;

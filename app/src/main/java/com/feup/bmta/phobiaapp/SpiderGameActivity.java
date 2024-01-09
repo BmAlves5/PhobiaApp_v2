@@ -165,7 +165,7 @@ public class SpiderGameActivity extends AppCompatActivity {
                     // Defina o texto apenas se o jogo não tiver terminado
                     if (!gameFinished) {
                         text = findViewById(R.id.disconnect);
-                        text.setText("Bluetooth disconnected");
+                        //text.setText("Bluetooth disconnected");
                     }
 
                 } catch (Exception e) {

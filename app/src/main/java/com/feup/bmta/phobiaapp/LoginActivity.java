@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (userId != -1) {
                     String ecgData = dbHelper.getECGData(userId);
 
-                    Toast.makeText(LoginActivity.this, "ECG Date: " + ecgData, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(LoginActivity.this, InitialPageActivity.class);
                     intent.putExtra("USER_ID", userId);

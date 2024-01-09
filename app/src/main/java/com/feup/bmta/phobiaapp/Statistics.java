@@ -19,7 +19,8 @@ public class Statistics extends AppCompatActivity {
 
     private DBHelper dbHelper;
 
-
+    private ECGChartView ecgChartView;
+    private ArrayList<Double> sdnnValues;
 
     // Open the database connection    private SQLiteDatabase mDatabase;
     private void openDatabase() {
@@ -97,6 +98,16 @@ public class Statistics extends AppCompatActivity {
         }
     }*/
 
+    // Método para obter a instância de ECGChartView
+    public ECGChartView getEcgChartView() {
+        return ecgChartView;
+    }
+
+    // Método para obter os dados SDNN
+    public ArrayList<Double> getSdnnValues() {
+        // Suponha que sdnnValues seja uma variável de classe
+        return sdnnValues;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,16 +139,25 @@ public class Statistics extends AppCompatActivity {
 
         // Definir os valores SDNN no gráfico ECGChartView
         ecgChartView.setValuesToPlot(sdnnValues);
+
+        /*Intent intent = new Intent(Statistics.this, HistoryActivity.class);
+        intent.putIntegerArrayListExtra("ECG_DATA_VALUES", ecgDataValues);
+
+        // Certifique-se de que sdnnValues é uma ArrayList<Double>
+        // Se for outra coisa, como ArrayList<Integer>, pode causar erro ao tentar passar DoubleArrayListExtra
+        intent.putExtra("SDNN_VALUES", sdnnValues);
+        startActivity(intent);*/
     }
 
     private ArrayList<Integer> getEcgDataValues() {
         ArrayList<Integer> ecgDataValues = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+
         try {
             // Verificar se a tabela existe
             if (isTableExists(db, "ecg_data")) {
-                Cursor cursor = db.rawQuery("SELECT ecg_data FROM ecg_data LIMIT 20", null);
+                Cursor cursor = db.rawQuery("SELECT ecg_data FROM ecg_data ORDER BY _id DESC LIMIT 20", null);
 
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
@@ -172,9 +192,4 @@ public class Statistics extends AppCompatActivity {
     }
 
 
-
-
-    public static Intent newIntent(Context context) {
-        return new Intent(context, Statistics.class);
-    }
 }
