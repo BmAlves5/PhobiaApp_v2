@@ -22,13 +22,13 @@ public class PatientFeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_feedback);
 
-        // Inicialize as variáveis com base nos IDs definidos no layout XML
+        // Inicializa as variáveis com base nos IDs definidos no layout XML
         answer1EditText = findViewById(R.id.answer1EditText);
         answer2EditText = findViewById(R.id.answer2EditText);
         answer3EditText = findViewById(R.id.answer3EditText);
         answer4EditText = findViewById(R.id.answer4EditText);
 
-        // Inicialize as variáveis com base nos IDs definidos no layout XML
+        // Inicializa as variáveis com base nos IDs definidos no layout XML
         question1Text = findViewById(R.id.question1Text);
         question2Text = findViewById(R.id.question2Text);
         question3Text = findViewById(R.id.question3Text);
@@ -37,7 +37,7 @@ public class PatientFeedbackActivity extends AppCompatActivity {
         endButton = findViewById(R.id.endButton);
         sendInformationButton = findViewById(R.id.sendInformationButton);
 
-        // Configurar a lógica do botão "End"
+        // Configura a lógica do botão "End"
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +45,7 @@ public class PatientFeedbackActivity extends AppCompatActivity {
             }
         });
 
-        // Configurar a lógica do botão "Send to Health Professional"
+        // Configura a lógica do botão "Send to Health Professional"
         sendInformationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

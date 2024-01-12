@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Configurar o ícone e o título da aplicação
+        // Configura o ícone e o título da aplicação
         ImageView appIcon = findViewById(R.id.appIcon);
         TextView appTitle = findViewById(R.id.appTitle);
 
-        appIcon.setImageResource(R.mipmap.head);  // Substitua "ic_launcher" pelo nome do seu ícone
+        appIcon.setImageResource(R.mipmap.head);
         appTitle.setText("PhobiaApp");
 
         // Delay de 10 segundos antes de ir para a LoginActivity
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private void goToLoginActivity() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
-        finish();  // Encerrar a atividade atual para evitar empilhamento desnecessário
+        finish();  // Encerra a atividade atual para evitar empilhamento desnecessário
     }
 
 

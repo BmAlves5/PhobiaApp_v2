@@ -40,7 +40,7 @@ public class User {
         return username;
     }
 
-    // Setters (opcional, dependendo se você precisa deles)
+    // Setters
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }

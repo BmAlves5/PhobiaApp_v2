@@ -121,7 +121,7 @@ public class ECGChartView extends View {
 
         canvas.drawPath(path, paintLine);
 
-        // Desenhe a curva para o paciente saudável e calmo (healthyPatientData)
+        // Desenha a curva para o paciente saudável e calmo (healthyPatientData)
         if (healthyPatientData != null && !healthyPatientData.isEmpty()) {
             Paint paintHealthy = new Paint();
             paintHealthy.setColor(Color.GREEN);

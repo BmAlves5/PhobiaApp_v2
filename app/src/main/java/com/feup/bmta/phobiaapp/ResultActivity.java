@@ -21,20 +21,20 @@ public class ResultActivity extends AppCompatActivity {
         statsButton = findViewById(R.id.statisticsButton);
         feedbackButton = findViewById(R.id.patientfeedbackButton);
 
-        // Configurar o clique do botão de Estatísticas
+        // Configura o clique do botão de Estatísticas
         statsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Adicione a lógica desejada para exibir estatísticas
+                // Adiciona a lógica desejada para exibir estatísticas
                 startActivity(new Intent(ResultActivity.this, Statistics.class));
             }
         });
 
-        // Configurar o clique do botão de Feedback do Paciente
+        // Configura o clique do botão de Feedback do Paciente
         feedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Adicione a lógica desejada para exibir feedback do paciente
+                // Adiciona a lógica desejada para exibir feedback do paciente
                 startActivity(new Intent(ResultActivity.this, PatientFeedbackActivity.class));
             }
         });
@@ -53,18 +53,18 @@ public class ResultActivity extends AppCompatActivity {
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtém o ID do usuário de onde você o tem
-                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
 
-                // Use o DBHelper para obter os detalhes do usuário
+                long userId = 1;
+
+                // Usa o DBHelper para obter os detalhes do utilizador
                 DBHelper dbHelper = new DBHelper(ResultActivity.this);
                 User userAccount = dbHelper.getUserById(userId);
 
-                // Inicia a AccountActivity e passa o ID do usuário como extra
+                // Inicia a AccountActivity e passa o ID do utilizador como extra
                 Intent intent = new Intent(ResultActivity.this, AccountActivity.class);
                 intent.putExtra("USER_ID", userId);
 
-                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                // Se o utilizador existir, inicia a AccountActivity, caso contrário, mostra um Toast
                 if (userAccount != null) {
                     startActivity(intent);
                 } else {
@@ -73,7 +73,7 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para sair do aplicativo
+        // Botão para sair da app
         Button exitButton = findViewById(R.id.exitButton);
 
         exitButton.setOnClickListener(new View.OnClickListener() {

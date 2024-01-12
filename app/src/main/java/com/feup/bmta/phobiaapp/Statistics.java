@@ -25,7 +25,7 @@ public class Statistics extends AppCompatActivity {
     // Open the database connection    private SQLiteDatabase mDatabase;
     private void openDatabase() {
         if (dbHelper == null) {
-            dbHelper = new DBHelper(this); // Certifique-se de que 'this' seja uma referência válida ao contexto
+            dbHelper = new DBHelper(this);
             dbHelper.openDatabase();
         }
     }
@@ -68,35 +68,6 @@ public class Statistics extends AppCompatActivity {
     }
 
 
-   /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statistics);
-
-       openDatabase();
-
-
-
-               // Obter o contêiner de dados
-        LinearLayout dataContainer = findViewById(R.id.dataContainer);
-
-        // Chame o método para obter os valores da coluna ecg_data da base de dados
-        ArrayList<Integer> ecgDataValues = getEcgDataValues();
-
-        ArrayList<Integer> sdnnvalues = calculateSDNNForAll(ecgDataValues);
-
-        ECGChartView ecgChartView = findViewById(R.id.ecgChartView);
-        ecgChartView.setSDNNValues(sdnnValues);
-
-        //ecgChartView.setEcgDataValues(ecgDataValues);
-
-        // Preencher dinamicamente as TextViews com os valores de ecg_data
-        for (int i = 0; i < ecgDataValues.size(); i++) {
-            TextView textView = new TextView(this);
-            textView.setText("Valor ECG " + (i + 1) + ": " + ecgDataValues.get(i));
-            dataContainer.addView(textView);
-        }
-    }*/
 
     // Método para obter a instância de ECGChartView
     public ECGChartView getEcgChartView() {
@@ -105,7 +76,7 @@ public class Statistics extends AppCompatActivity {
 
     // Método para obter os dados SDNN
     public ArrayList<Double> getSdnnValues() {
-        // Suponha que sdnnValues seja uma variável de classe
+
         return sdnnValues;
     }
     @Override
@@ -117,24 +88,24 @@ public class Statistics extends AppCompatActivity {
 
         ECGChartView ecgChartView = findViewById(R.id.ecgChartView);
 
-        // Obter os valores da coluna ecg_data da base de dados
+        // Obtem os valores da coluna ecg_data da base de dados
         ArrayList<Integer> ecgDataValues = getEcgDataValues();
 
-        // Calcular o SDNN para cada conjunto de valores de intervalo RR
+        // Calcula o SDNN para cada conjunto de valores de intervalo RR
         ArrayList<Double> sdnnValues = calculateSDNNForEach(ecgDataValues);
 
-        // Definir os valores SDNN no gráfico ECGChartView
+        // Define os valores SDNN no gráfico ECGChartView
         ecgChartView.setValuesToPlot(sdnnValues);
 
-        // Simular dados de um paciente saudável e calmo (substitua pelos seus próprios dados)
+        // Simula dados de um paciente saudável e calmo (substitua pelos seus próprios dados)
         ArrayList<Integer> healthyPatientData = generateHealthyPatientData(ecgDataValues.size());
         ecgChartView.setHealthyPatientData(healthyPatientData);
 
-        // Calcular a média dos valores do intervalo RR
+        // Calcula a média dos valores do intervalo RR
         double averageRR = calculateAverage(ecgDataValues);
 
 
-        // Calcular o SDNN para cada conjunto de valores de intervalo RR
+        // Calcula o SDNN para cada conjunto de valores de intervalo RR
         ArrayList<Double> sdnnValuesForLast20 = new ArrayList<>();
         for (int i = ecgDataValues.size() - 20; i < ecgDataValues.size() - 1; i++) {
             ArrayList<Integer> rrIntervals = new ArrayList<>();
@@ -144,16 +115,10 @@ public class Statistics extends AppCompatActivity {
             sdnnValuesForLast20.add(sdnn);
         }
 
-        // Definir os valores SDNN no gráfico ECGChartView
+        // Define os valores SDNN no gráfico ECGChartView
         ecgChartView.setValuesToPlot(sdnnValuesForLast20);
 
-    /*Intent intent = new Intent(Statistics.this, HistoryActivity.class);
-    intent.putIntegerArrayListExtra("ECG_DATA_VALUES", ecgDataValues);
 
-    // Certifique-se de que sdnnValues é uma ArrayList<Double>
-    // Se for outra coisa, como ArrayList<Integer>, pode causar erro ao tentar passar DoubleArrayListExtra
-    intent.putExtra("SDNN_VALUES", sdnnValues);
-    startActivity(intent);*/
     }
 
     private ArrayList<Integer> generateHealthyPatientData(int size) {
@@ -163,7 +128,7 @@ public class Statistics extends AppCompatActivity {
 
         ArrayList<Integer> data = new ArrayList<>();
 
-        // Repetir os valores teóricos para preencher o array até o tamanho desejado
+        // Repete os valores teóricos para preencher o array até o tamanho desejado
         for (int i = 0; i < size; i++) {
             data.add(theoreticalValues[i % theoreticalValues.length]);
         }
@@ -178,7 +143,7 @@ public class Statistics extends AppCompatActivity {
 
 
         try {
-            // Verificar se a tabela existe
+            // Verifica se a tabela existe
             if (isTableExists(db, "ecg_data")) {
                 Cursor cursor = db.rawQuery("SELECT ecg_data FROM ecg_data ORDER BY _id DESC LIMIT 20", null);
 
@@ -193,11 +158,11 @@ public class Statistics extends AppCompatActivity {
                     cursor.close();
                 }
             } else {
-                // Lidar com a tabela inexistente
+                // Lida com a tabela inexistente
                 Toast.makeText(this, "A tabela ECGData não existe", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            // Lide com exceções, se necessário
+            // Lida com exceções, se necessário
         } finally {
             if (db != null && db.isOpen()) {
                 db.close();

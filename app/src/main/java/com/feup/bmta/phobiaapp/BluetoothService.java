@@ -115,11 +115,9 @@ public class BluetoothService extends Activity {
 
         // Check the result of the insertion
         if (newRowId != -1) {
-            // Successful insertion
-            // Do something if needed
+
         } else {
-            // Failed insertion
-            // Handle the failure
+
         }
     }
 
@@ -182,14 +180,6 @@ public class BluetoothService extends Activity {
             }
         });
 
-        /*Button btnStartTest = findViewById(R.id.btnStartTest);
-        btnStartTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startGameButtonClick(v);
-            }
-        });*/
-
         // Botão
         Button btnStartTest = findViewById(R.id.btnStartTest);
         btnStartTest.setOnClickListener(new View.OnClickListener() {
@@ -201,68 +191,6 @@ public class BluetoothService extends Activity {
         });
     }
 
-    // The Handler that gets information back from the BioLib
-/*    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case BioLib.MESSAGE_DEVICE_NAME:
-                    mConnectedDeviceName = msg.getData().getString(DEVICE_NAME);
-                    Toast.makeText(getApplicationContext(), "Connected to " + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
-                    text.append("Connected to " + mConnectedDeviceName + " \n");
-                    break;
-
-                case BioLib.STATE_CONNECTED:
-                    Toast.makeText(getApplicationContext(), "Connected to " + deviceToConnect.getName(), Toast.LENGTH_SHORT).show();
-                    text.append("   Connect to " + deviceToConnect.getName() + " \n");
-                    isConn = true;
-                    buttonConnect.setEnabled(false);
-                    break;
-
-                case BioLib.UNABLE_TO_CONNECT_DEVICE:
-                    Toast.makeText(getApplicationContext(), "Unable to connect device! ", Toast.LENGTH_SHORT).show();
-                    text.append("   Unable to connect device \n");
-                    isConn = false;
-                    buttonConnect.setEnabled(true);
-                    break;
-
-                case BioLib.MESSAGE_DISCONNECT_TO_DEVICE:
-                    Toast.makeText(getApplicationContext(), "Device connection was lost", Toast.LENGTH_SHORT).show();
-                    text.append("   Disconnected from " + deviceToConnect.getName() + " \n");
-                    isConn = false;
-                    buttonConnect.setEnabled(true);
-                    break;
-
-                case BioLib.MESSAGE_BLUETOOTH_ENABLED:
-                    Toast.makeText(getApplicationContext(), "Bluetooth is now enabled! ", Toast.LENGTH_SHORT).show();
-                    text.append("Bluetooth is now enabled \n");
-                    text.append("Macaddress selected: " + address + " \n");
-                    buttonConnect.setEnabled(true);
-                    break;
-
-                case BioLib.MESSAGE_BLUETOOTH_NOT_ENABLED:
-                    Toast.makeText(getApplicationContext(), "Bluetooth not enabled! ", Toast.LENGTH_SHORT).show();
-                    text.append("Bluetooth not enabled \n");
-                    isConn = false;
-                    buttonConnect.setEnabled(false);
-                    break;
-
-                case BioLib.REQUEST_ENABLE_BT:
-                    Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    startActivityForResult(enableIntent, BioLib.REQUEST_ENABLE_BT);
-                    text.append("Request Bluetooth enable \n");
-                    break;
-
-                case BioLib.MESSAGE_READ:
-                    text.append("RECEIVED: " + msg.arg1 + "\n");
-                    break;
-
-                case BioLib.MESSAGE_TOAST:
-                    Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    };*/
 
     private final Handler mHandler = new Handler() {
         @Override
@@ -495,11 +423,6 @@ public class BluetoothService extends Activity {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return;
             }
             lib.mBluetoothAdapter.cancelDiscovery();
@@ -515,11 +438,10 @@ public class BluetoothService extends Activity {
         finish();
     }
 
-    // Método onde você pode recuperar o nível selecionado e realizar a ação necessária
+    // Método onde é possível recuperar o nível selecionado e realizar a ação necessária
     private void processReceivedLevel() {
         int receivedLevel = getIntent().getIntExtra("LEVEL_SELECTED", 1); // 1 é um valor padrão
-        // Faça o que for necessário com o nível recebido
-        // Por exemplo, você pode usar receivedLevel para algum processamento ou exibição
+
     }
 
 }

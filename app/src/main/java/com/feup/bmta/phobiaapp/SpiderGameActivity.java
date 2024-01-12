@@ -26,7 +26,7 @@ import Bio.Library.namespace.BioLib;
 public class SpiderGameActivity extends AppCompatActivity {
 
     private TextView levelTextView;
-    private int[] spiderCounts = {1, 2, 3, 4, 5}; // Quantidade de aranhas por nível
+    private int[] spiderCounts = {1, 2, 3, 4, 5};
     private int currentLevel = 0;
     private Handler handler;
     private Random random;
@@ -49,9 +49,9 @@ public class SpiderGameActivity extends AppCompatActivity {
     private DBHelper dbHelper;
 
     // Intervalos para cada nível
-    private final int[] levelIntervals = {2000, 2500, 3000, 2000, 2000}; // Adicione mais intervalos conforme necessário
+    private final int[] levelIntervals = {2000, 2500, 3000, 2000, 2000};
 
-    private boolean gameFinished = false; // Adicione esta variável de controle
+    private boolean gameFinished = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,6 @@ public class SpiderGameActivity extends AppCompatActivity {
         for (int i = 0; i < levelButtons.length; i++) {
             final int level = i + 1;
 
-            // Adicione as tags aqui
             levelButtons[i].setTag(String.valueOf(level));
 
             levelButtons[i].setOnClickListener(new View.OnClickListener() {
@@ -104,23 +103,23 @@ public class SpiderGameActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para acessar a conta do usuário
+        // Botão para aceder a conta do utilizador
         Button accountButton = findViewById(R.id.accountButton);
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtém o ID do usuário de onde você o tem
-                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
 
-                // Use o DBHelper para obter os detalhes do usuário
+                long userId = 1;
+
+                // Usa o DBHelper para obter os detalhes do utilizador
                 DBHelper dbHelper = new DBHelper(SpiderGameActivity.this);
                 User userAccount = dbHelper.getUserById(userId);
 
-                // Inicia a AccountActivity e passa o ID do usuário como extra
+                // Inicia a AccountActivity e passa o ID do utilizador como extra
                 Intent intent = new Intent(SpiderGameActivity.this, AccountActivity.class);
                 intent.putExtra("USER_ID", userId);
 
-                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                // Se o utilizador existir, inicia a AccountActivity, caso contrário, mostra um Toast
                 if (userAccount != null) {
                     startActivity(intent);
                 } else {
@@ -129,7 +128,7 @@ public class SpiderGameActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para sair do aplicativo
+        // Botão para sair da app
         Button exitButton = findViewById(R.id.exitButton);
 
         exitButton.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +138,7 @@ public class SpiderGameActivity extends AppCompatActivity {
             }
         });
 
-        // Inicialize o botão "Next"
+        // Inicializa o botão "Next"
         nextButton = findViewById(R.id.nextButton);
         // No método onCreate, após a inicialização do botão "Next"
         nextButton.setVisibility(View.INVISIBLE); // Torna o botão invisível inicialmente
@@ -156,13 +155,13 @@ public class SpiderGameActivity extends AppCompatActivity {
 
             private void disconnect() {
                 try {
-                    // Reset(); // Certifique-se de implementar o método Reset() conforme necessário
+                    // Reset();
 
                     if (lib != null) {
                         lib.Disconnect();
                     }
 
-                    // Defina o texto apenas se o jogo não tiver terminado
+
                     if (!gameFinished) {
                         text = findViewById(R.id.disconnect);
                         //text.setText("Bluetooth disconnected");
@@ -177,36 +176,6 @@ public class SpiderGameActivity extends AppCompatActivity {
     }
 
 
-
-   /* private void setButtonVisibility(int visibility) {
-        Button homeButton = findViewById(R.id.homeButton);
-        Button accountButton = findViewById(R.id.accountButton);
-        Button exitButton = findViewById(R.id.exitButton);
-
-        homeButton.setVisibility(visibility);
-        accountButton.setVisibility(visibility);
-        exitButton.setVisibility(visibility);
-    }*/
-
-/*    private void disconnect() {
-        try {
-            // Reset(); // Certifique-se de implementar o método Reset() conforme necessário
-
-            if (lib != null) {
-                lib.Disconnect();
-            }
-
-            // Defina o texto apenas se o jogo não tiver terminado
-            if (!gameFinished) {
-                text = findViewById(R.id.disconnect);
-                text.setText("Bluetooth disconnected");
-            }
-
-        } catch (Exception e) {
-            text.setText("Error during disconnection");
-            e.printStackTrace();
-        }
-    }*/
 
     public void startGame(int level) {
 
@@ -323,7 +292,7 @@ public class SpiderGameActivity extends AppCompatActivity {
 
             vibrateDevice();
         } else {
-            // Trate o caso em que as dimensões são inválidas
+
             Toast.makeText(this, "Invalid dimensions", Toast.LENGTH_SHORT).show();
         }
 
@@ -343,7 +312,7 @@ public class SpiderGameActivity extends AppCompatActivity {
 
     private void vibrateDevice() {
         if (vibrator != null && vibrator.hasVibrator()) {
-            // Vibre por 500 milissegundos (0,5 segundos)
+            // Vibra por 500 milissegundos (0,5 segundos)
             vibrator.vibrate(500);
         }
     }
@@ -354,7 +323,7 @@ public class SpiderGameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private static final int BLUETOOTH_REQUEST_CODE = 100; // Escolha um código apropriado
+    private static final int BLUETOOTH_REQUEST_CODE = 100;
 
     // Método para iniciar a BluetoothService com o nível selecionado
     private void startBluetoothServiceWithLevel(int selectedLevel) {
@@ -372,7 +341,6 @@ public class SpiderGameActivity extends AppCompatActivity {
             int levelSelected = data.getIntExtra("LEVEL_SELECTED", 1);
             startBluetoothServiceWithLevel(levelSelected);
 
-            // Use o nível selecionado aqui
         }
     }
 

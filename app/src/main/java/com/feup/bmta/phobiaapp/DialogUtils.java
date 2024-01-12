@@ -15,7 +15,7 @@ public class DialogUtils {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Sim, redirecione para a atividade de destino
+
                 Intent intent = new Intent(context, targetActivity);
                 context.startActivity(intent);
                 if (context instanceof Activity) {

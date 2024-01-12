@@ -112,8 +112,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Método para converter QRS para uma representação de string
     private String convertQRSToString(BioLib.QRS qrs) {
-        // Implemente a lógica para converter o objeto QRS em uma string
-        // Exemplo: Concatenar algumas propriedades do objeto QRS
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Position: ").append(qrs.position).append("\n");
         stringBuilder.append("BPMi: ").append(qrs.bpmi).append("\n");
@@ -124,15 +123,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return stringBuilder.toString();
     }
 
-    // Método para obter dados ECG com base no usuário
+    // Método para obter dados ECG com base no utilizador
     public String getECGData(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         String ecgData = null;
 
-        // Colunas que você deseja recuperar
         String[] projection = {COLUMN_ECG};
 
-        // Cláusula WHERE para filtrar pelos dados do usuário
+        // Cláusula WHERE para filtrar pelos dados do utilizador
         String selection = COLUMN_ID + " = ?";
         String[] selectionArgs = {String.valueOf(userId)};
 
@@ -158,15 +156,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Método para obter detalhes do usuário pelo ID
+    // Método para obter detalhes do utilizador pelo ID
     public User getUserById(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         User user = null;
 
-        // Colunas que você deseja recuperar
+
         String[] projection = {COLUMN_FULL_NAME, COLUMN_DATE_OF_BIRTH, COLUMN_GENDER, COLUMN_ID_CARD_NUMBER, COLUMN_USERNAME};
 
-        // Cláusula WHERE para filtrar pelos dados do usuário
+        // Cláusula WHERE para filtrar pelos dados do utilizador
         String selection = COLUMN_ID + " = ?";
         String[] selectionArgs = {String.valueOf(userId)};
 
