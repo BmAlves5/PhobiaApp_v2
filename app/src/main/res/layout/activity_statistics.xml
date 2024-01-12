@@ -79,21 +79,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="550dp"
-        android:hint="This graphic represents the levels of stress.
-
-        You need to train more to reduce your phobia!"
+        android:hint="SDNN (Standard Deviation of NN Intervals) is a measure of heart rate variability (HRV), reflecting the fluctuation in the intervals between heartbeats. Higher SDNN values indicate an adaptive and healthy response of the autonomic nervous system, suggesting greater effectiveness in stress management."
+        android:textAlignment="center"
         android:textSize="14dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/averageTextView"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="600dp"
-        android:text="Average RR values:"
-        android:textSize="14dp"
-        android:textStyle="bold" />
+        android:textStyle="normal|bold" />
 
 
 </RelativeLayout>

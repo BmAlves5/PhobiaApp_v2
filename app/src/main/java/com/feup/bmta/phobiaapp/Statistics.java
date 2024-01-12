@@ -124,8 +124,8 @@ public class Statistics extends AppCompatActivity {
         double averageRR = calculateAverage(ecgDataValues);
 
        // Exibir o valor médio em uma TextView
-        TextView averageTextView = findViewById(R.id.averageTextView);
-        averageTextView.setText("Average RR values: " + averageRR);
+/*        TextView averageTextView = findViewById(R.id.averageTextView);
+        averageTextView.setText("Average RR values: " + averageRR);*/
 
         // Calcular o SDNN para cada conjunto de valores de intervalo RR
         ArrayList<Double> sdnnValues = new ArrayList<>();
