@@ -32,11 +32,11 @@ public class InitialPageActivity extends AppCompatActivity {
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtendo os valores do ECG e SDNN
+                // Obter os valores do ECG e SDNN
              //   ArrayList<Integer> ecgDataValues = getEcgDataValues();
              //   ArrayList<Double> sdnnValues = getSDNNValues(ecgDataValues);
 
-                // Iniciando a HistoryActivity e passando os dados do ECG e SDNN via Intent
+                // Iniciar a HistoryActivity e passar os dados do ECG e SDNN via Intent
                 Intent intent = new Intent(InitialPageActivity.this, HistoryActivity.class);
             //    intent.putIntegerArrayListExtra("ECG_DATA_VALUES", ecgDataValues);
              //   intent.putDoubleArrayListExtra("SDNN_VALUES", sdnnValues);
@@ -54,23 +54,22 @@ public class InitialPageActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para acessar a conta do usuário
+        // Botão para aceder a conta do utilizador
         Button accountButton = findViewById(R.id.accountButton);
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtém o ID do usuário de onde você o tem
-                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
 
-                // Use o DBHelper para obter os detalhes do usuário
+                long userId = 1;
+
                 DBHelper dbHelper = new DBHelper(InitialPageActivity.this);
                 User userAccount = dbHelper.getUserById(userId);
 
-                // Inicia a AccountActivity e passa o ID do usuário como extra
+                // Inicia a AccountActivity e passa o ID do utilizador como extra
                 Intent intent = new Intent(InitialPageActivity.this, AccountActivity.class);
                 intent.putExtra("USER_ID", userId);
 
-                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                // Se o utilizador existir, inicia a AccountActivity, caso contrário, mostra um Toast
                 if (userAccount != null) {
                     startActivity(intent);
                 } else {
@@ -79,7 +78,7 @@ public class InitialPageActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para sair do aplicativo
+        // Botão para sair da app
         Button exitButton = findViewById(R.id.exitButton);
 
         exitButton.setOnClickListener(new View.OnClickListener() {

@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        dbHelper = new DBHelper(this); // Inicialize o DBHelper aqui
+        dbHelper = new DBHelper(this);
 
 
         usernameEditText = findViewById(R.id.useremailEditText);
@@ -30,27 +30,27 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
         Button registerButton = findViewById(R.id.registerButton);
 
-        // Verifique se o usuário já está registrado
+        // Verifica se o utilizador já está registado
         SharedPreferences sharedPreferences = getSharedPreferences("MinhasPreferencias", Context.MODE_PRIVATE);
         boolean registrado = sharedPreferences.getBoolean("registrado", false);
 
         Intent intent;
 
         if (registrado) {
-            // Se registrado, vá diretamente para a página inicial
+            // Se registado, vai diretamente para a página inicial
             intent = new Intent(LoginActivity.this, InitialPageActivity.class);
             startActivity(intent);
-            finish();  // Finaliza a atividade atual para impedir que o usuário volte à tela de login
+            finish();  // Finaliza a atividade atual para impedir que o utilizador volte à tela de login
         }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtenha os valores inseridos pelos usuários
+                // Obtem os valores inseridos pelos utilizadores
                 String username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
 
-                // Verifique as credenciais e obtenha o ID do usuário
+                // Verifica as credenciais e obtem o ID do utilizador
                 DBHelper dbHelper = new DBHelper(LoginActivity.this);
                 long userId = dbHelper.checkCredentialsAndGetUserId(username, password);
 
@@ -64,13 +64,13 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("USER_ID", userId);
                     startActivity(intent);
 
-                    // Salve o status de registro no SharedPreferences
+
                     SharedPreferences sharedPreferences = getSharedPreferences("MinhasPreferencias", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("registado", true);
                     editor.apply();
 
-                    // Vá para a página inicial
+                    // Vai para a página inicial
                     intent = new Intent(LoginActivity.this, InitialPageActivity.class);
                     intent.putExtra("USER_ID", userId);
                     startActivity(intent);
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     finish();
                 } else {
-                    // Credenciais incorretas, exiba mensagem de erro
+                    // Credenciais incorretas, exibe mensagem de erro
                     Toast.makeText(LoginActivity.this, "Incorrect credentials. Please try again.", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -35,7 +35,7 @@ public class InstructionsActivity extends AppCompatActivity {
 
         address = "00:23:FE:00:0B:33";
 
-        // Inicialize sua instância de BluetoothService aqui (substitua com sua lógica de inicialização)
+
         bluetoothService = new BluetoothService();
 
         Button startTestButton = (Button) findViewById(R.id.connectVitalJacket);

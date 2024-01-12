@@ -58,23 +58,23 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        // Botão para acessar a conta do usuário
+        // Botão para ter acesso a conta do utilizador
         Button accountButton = findViewById(R.id.accountButton);
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtém o ID do usuário de onde você o tem
-                long userId = 1; // Substitua isso pela maneira como você obtém o ID do usuário
+                // Obtém o ID do utilizador
+                long userId = 1;
 
-                // Use o DBHelper para obter os detalhes do usuário
+                // DBHelper usado para obter os detalhes do utilizador
                 DBHelper dbHelper = new DBHelper(AccountActivity.this);
                 User userAccount = dbHelper.getUserById(userId);
 
-                // Inicia a AccountActivity e passa o ID do usuário como extra
+                // Inicia a AccountActivity e passa o ID do utilizador como extra
                 Intent intent = new Intent(AccountActivity.this, AccountActivity.class);
                 intent.putExtra("USER_ID", userId);
 
-                // Se o usuário existir, inicia a AccountActivity, caso contrário, mostra um Toast
+                // Se o utilizador existir, inicia a AccountActivity, caso contrário, mostra um Toast
                 if (userAccount != null) {
                     startActivity(intent);
                 } else {
