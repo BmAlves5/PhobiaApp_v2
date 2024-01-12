@@ -120,34 +120,57 @@ public class Statistics extends AppCompatActivity {
         // Obter os valores da coluna ecg_data da base de dados
         ArrayList<Integer> ecgDataValues = getEcgDataValues();
 
+        // Calcular o SDNN para cada conjunto de valores de intervalo RR
+        ArrayList<Double> sdnnValues = calculateSDNNForEach(ecgDataValues);
+
+        // Definir os valores SDNN no gráfico ECGChartView
+        ecgChartView.setValuesToPlot(sdnnValues);
+
+        // Simular dados de um paciente saudável e calmo (substitua pelos seus próprios dados)
+        ArrayList<Integer> healthyPatientData = generateHealthyPatientData(ecgDataValues.size());
+        ecgChartView.setHealthyPatientData(healthyPatientData);
+
         // Calcular a média dos valores do intervalo RR
         double averageRR = calculateAverage(ecgDataValues);
 
-       // Exibir o valor médio em uma TextView
-        TextView averageTextView = findViewById(R.id.averageTextView);
-        averageTextView.setText("Average RR values: " + averageRR);
 
         // Calcular o SDNN para cada conjunto de valores de intervalo RR
-        ArrayList<Double> sdnnValues = new ArrayList<>();
+        ArrayList<Double> sdnnValuesForLast20 = new ArrayList<>();
         for (int i = ecgDataValues.size() - 20; i < ecgDataValues.size() - 1; i++) {
             ArrayList<Integer> rrIntervals = new ArrayList<>();
             rrIntervals.add(ecgDataValues.get(i));
             rrIntervals.add(ecgDataValues.get(i + 1));
             double sdnn = calculateSDNN(rrIntervals);
-            sdnnValues.add(sdnn);
+            sdnnValuesForLast20.add(sdnn);
         }
 
         // Definir os valores SDNN no gráfico ECGChartView
-        ecgChartView.setValuesToPlot(sdnnValues);
+        ecgChartView.setValuesToPlot(sdnnValuesForLast20);
 
-        /*Intent intent = new Intent(Statistics.this, HistoryActivity.class);
-        intent.putIntegerArrayListExtra("ECG_DATA_VALUES", ecgDataValues);
+    /*Intent intent = new Intent(Statistics.this, HistoryActivity.class);
+    intent.putIntegerArrayListExtra("ECG_DATA_VALUES", ecgDataValues);
 
-        // Certifique-se de que sdnnValues é uma ArrayList<Double>
-        // Se for outra coisa, como ArrayList<Integer>, pode causar erro ao tentar passar DoubleArrayListExtra
-        intent.putExtra("SDNN_VALUES", sdnnValues);
-        startActivity(intent);*/
+    // Certifique-se de que sdnnValues é uma ArrayList<Double>
+    // Se for outra coisa, como ArrayList<Integer>, pode causar erro ao tentar passar DoubleArrayListExtra
+    intent.putExtra("SDNN_VALUES", sdnnValues);
+    startActivity(intent);*/
     }
+
+    private ArrayList<Integer> generateHealthyPatientData(int size) {
+        // Valores teóricos para um paciente saudável e calmo
+        int[] theoreticalValues = {800, 810, 820, 830, 840, 850, 860, 870, 880, 890,
+                900, 910, 920, 930, 940, 950, 960, 970, 980, 990};
+
+        ArrayList<Integer> data = new ArrayList<>();
+
+        // Repetir os valores teóricos para preencher o array até o tamanho desejado
+        for (int i = 0; i < size; i++) {
+            data.add(theoreticalValues[i % theoreticalValues.length]);
+        }
+
+        return data;
+    }
+
 
     private ArrayList<Integer> getEcgDataValues() {
         ArrayList<Integer> ecgDataValues = new ArrayList<>();

@@ -174,14 +174,13 @@ public class BluetoothService extends Activity {
                     Reset();
                     text.setText("");
                     lib.Connect(address, 5);
+                    buttonConnect.setEnabled(false);
                 } catch (Exception e) {
                     text.setText("Error to connect device: " + address);
                     e.printStackTrace();
                 }
             }
         });
-
-        buttonConnect.setEnabled(false);  // Disable the button initially
 
         /*Button btnStartTest = findViewById(R.id.btnStartTest);
         btnStartTest.setOnClickListener(new View.OnClickListener() {

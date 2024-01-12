@@ -15,6 +15,10 @@ import java.util.Collections;
 public class ECGChartView extends View {
 
     private ArrayList<Integer> ecgDataValues;
+    private ArrayList<Double> receivedValues;
+    private ArrayList<Integer> theoreticalValues;
+
+    private ArrayList<Integer> healthyPatientData;
     private Paint paintLine;
 
     private ArrayList<Double> sdnnValues;
@@ -42,13 +46,18 @@ public class ECGChartView extends View {
         invalidate();
     }
 
+    public void setHealthyPatientData(ArrayList<Integer> healthyPatientData) {
+        this.healthyPatientData = healthyPatientData;
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if (sdnnValues == null || sdnnValues.isEmpty()) {
-            return;
-        }
+            if (sdnnValues == null || sdnnValues.isEmpty()) {
+                return;
+            }
 
         int paddingLeft = 100;
         int paddingRight = 50;
@@ -111,6 +120,27 @@ public class ECGChartView extends View {
         }
 
         canvas.drawPath(path, paintLine);
+
+        // Desenhe a curva para o paciente saudável e calmo (healthyPatientData)
+        if (healthyPatientData != null && !healthyPatientData.isEmpty()) {
+            Paint paintHealthy = new Paint();
+            paintHealthy.setColor(Color.GREEN);
+            paintHealthy.setStrokeWidth(3f);
+
+            Path pathHealthy = new Path();
+            for (int i = 0; i < healthyPatientData.size(); i++) {
+                float x = paddingLeft + (xStep * i);
+                float y = (float) (getHeight() - paddingBottom - (healthyPatientData.get(i).floatValue() - minY) * (height / (maxY - minY)));
+
+                if (i == 0) {
+                    pathHealthy.moveTo(x, y);
+                } else {
+                    pathHealthy.lineTo(x, y);
+                }
+            }
+
+            canvas.drawPath(pathHealthy, paintHealthy);
+        }
     }
 
 }
